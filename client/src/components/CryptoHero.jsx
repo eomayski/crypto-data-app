@@ -1,147 +1,168 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// URL на API за търсене
+const COINDESK_SEARCH_API = 'https://data-api.coindesk.com/asset/v1/search';
+// Интервал за debouncing в милисекунди
+const DEBOUNCE_DELAY = 500;
 
-export default function CryptoHero () {
-  // Примерен масив за статистики
+export default function CryptoHero() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+
+  // Примерен масив за статистики (запазваме го)
   const stats = [
     { label: '24h Обем на търговия', value: '$76 млрд+' },
     { label: 'Листвани криптовалути', value: '600+' },
     { label: 'Регистрирани потребители', value: '90 млн.' },
   ];
+  
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchTerm.length > 1) {
+        fetchCryptoAssets(searchTerm);
+      } else {
+        setSearchResults([]);
+        setShowResults(false);
+        setIsLoading(false);
+      }
+    }, DEBOUNCE_DELAY);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
 
-  // Примерен масив с криптовалути за търсене
-  const cryptoAssets = [
-    { id: 'bitcoin', symbol: 'BTC', name: 'Bitcoin', logo: 'https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579', detailsLink: '/crypto/bitcoin' },
-    { id: 'ethereum', symbol: 'ETH', name: 'Ethereum', logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', detailsLink: '/crypto/ethereum' },
-    { id: 'cardano', symbol: 'ADA', name: 'Cardano', logo: 'https://assets.coingecko.com/coins/images/975/small/cardano.png?1547034860', detailsLink: '/crypto/cardano' },
-    { id: 'binancecoin', symbol: 'BNB', name: 'BNB', logo: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png?1547034615', detailsLink: '/crypto/binancecoin' },
-    { id: 'ripple', symbol: 'XRP', name: 'XRP', logo: 'https://assets.coingecko.com/coins/images/44/standard/xrp-symbol-white-128.png?1696501442', detailsLink: '/crypto/ripple' },
-    { id: 'solana', symbol: 'SOL', name: 'Solana', logo: 'https://assets.coingecko.com/coins/images/4128/small/solana.png?1640133427', detailsLink: '/crypto/solana' },
-    { id: 'dogecoin', symbol: 'DOGE', name: 'Dogecoin', logo: 'https://assets.coingecko.com/coins/images/5/small/dogecoin.png?1547033577', detailsLink: '/crypto/dogecoin' },
-  ];
 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [showResults, setShowResults] = useState(false);
+  const fetchCryptoAssets = async (value) => {
+    setIsLoading(true);
+    setShowResults(true);
+    
+    try {
+      const response = await fetch(`${COINDESK_SEARCH_API}?search_string=${value}&limit=5`);
+      
+      if (!response.ok) {
+        throw new Error('Грешка при извличане на данни от CoinDesk');
+      }
 
-  const handleSearchChange = (event) => {
-    const value = event.target.value;
-    setSearchTerm(value);
+      const data = await response.json();
+      
+      const assets = data.Data.LIST || []; 
 
-    if (value.length > 0) {
-      const filteredResults = cryptoAssets.filter(asset =>
-        asset.name.toLowerCase().includes(value.toLowerCase()) ||
-        asset.symbol.toLowerCase().includes(value.toLowerCase())
-      );
-      setSearchResults(filteredResults);
-      setShowResults(true);
-    } else {
-      setSearchResults([]);
-      setShowResults(false);
+      console.log(assets);
+      
+      setSearchResults(assets.map(asset => ({
+        id: asset.ID,
+        symbol: asset.SYMBOL, 
+        name: asset.NAME,
+        logo: asset.LOGO_URL, 
+        detailsLink: `/crypto/${asset.URI.toLowerCase()}`,
+      })));
+
+    } catch (error) {
+      console.error("Fetch Error:", error);
+      setSearchResults([]); 
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   const handleInputFocus = () => {
-    if (searchTerm.length > 0) {
+    if (searchTerm.length > 1 || searchResults.length > 0) {
       setShowResults(true);
     }
   };
 
   const handleInputBlur = () => {
-    // Малко забавяне, за да позволи клик върху резултат преди да скрие
-    setTimeout(() => setShowResults(false), 100); 
+    setTimeout(() => setShowResults(false), 150); 
   };
+  
 
-  return (
-    <div className="bg-gray-900 text-white">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-          
-          {/* Съдържание на Hero секцията (Заглавие, Описание, Търсене) */}
-          <div className="lg:col-span-6">
-            {/* Заглавие */}
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-              <span className="block xl:inline">Познавай своето</span>{' '}
-              <span className="block text-indigo-400 xl:inline">крипто</span>
-            </h1>
+    return (
+        <div className="bg-gray-900 text-white">
+            <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+                <div className="lg:grid lg:grid-cols-12 lg:gap-8">
 
-            {/* Описание */}
-            <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-              Следете най-новите тенденции в света на децентрализираните активи. Изградете и следете своето крипто потфолио.
-            </p>
+                    <div className="lg:col-span-6">
+                        {/* Заглавие */}
+                        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+                            <span className="block xl:inline">Know your</span>{' '}
+                            <span className="block text-indigo-400 xl:inline">Crypto</span>
+                        </h1>
 
-            {/* Поле за търсене и резултати */}
-            <div className="mt-10 relative">
-              <div className="flex justify-center rounded-md shadow-sm">
-                <input
-                  type="text"
-                  name="crypto-search"
-                  id="crypto-search"
-                  className="block rounded-md w-3/4 border-gray-300 bg-gray-700 text-white focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3"
-                  placeholder="Търси криптовалути (напр. BTC, Ethereum)"
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                  onFocus={handleInputFocus}
-                  onBlur={handleInputBlur}
-                  />
-              {/* Показване на резултати */}
-              {showResults && searchResults.length > 0 && (
-                  <div className="absolute mt-12 w-3/4 rounded-md bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5">
-                  <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                    {searchResults.map((asset) => (
-                        <a
-                        key={asset.id}
-                        href={asset.detailsLink}
-                        className="flex items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 hover:text-white"
-                        role="menuitem"
-                        >
-                        <img src={asset.logo} alt={asset.name} className="h-6 w-6 mr-3" />
-                        <span className="font-semibold">{asset.symbol}</span>
-                        <span className="ml-2 text-gray-400"> - {asset.name}</span>
-                      </a>
-                    ))}
-                  </div>
+                        {/* Описание */}
+                        <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                            Follow the latest trends in the world of decentralized assets. <br /> Build and monitor your crypto portfolio.
+                        </p>
+
+                        {/* Поле за търсене и резултати */}
+                        <div className="mt-10 relative">
+                            <div className="flex justify-center">
+                                <input
+                                    type="text"
+                                    name="crypto-search"
+                                    id="crypto-search"
+                                    className="block rounded-md w-3/4 border-gray-300 bg-gray-700 text-white focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3"
+                                    placeholder="Search currencies (e.g., BTC, Ethereum)"
+                                    value={searchTerm}
+                                    onChange={handleSearchChange}
+                                    onFocus={handleInputFocus}
+                                    onBlur={handleInputBlur}
+                                />
+                                {/* Показване на резултати */}
+                                {showResults && searchResults.length > 0 && (
+                                    <div className="absolute mt-12 w-3/4 rounded-md bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5">
+                                        <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                            {searchResults.map((asset) => (
+                                                <a
+                                                    key={asset.id}
+                                                    href={asset.detailsLink}
+                                                    className="flex items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 hover:text-white"
+                                                    role="menuitem"
+                                                >
+                                                    <img src={asset.logo} alt={asset.symbol} className="h-6 w-6 mr-3" />
+                                                    <span className="font-semibold">{asset.symbol}</span>
+                                                    <span className="ml-2 text-gray-400"> - {asset.name}</span>
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                                {showResults && searchResults.length === 0 && searchTerm.length > 0 && (
+                                    <div className="absolute z-10 mt-12 w-3/4 rounded-md bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5">
+                                        <div className="py-1 px-4 text-sm text-gray-400">Няма намерени резултати.</div>
+                                    </div>
+                                )}
+
+                            </div>
+                        </div>
+
+                        {/* Секция със Статистики 
+                        <div className="mt-12">
+                            <div className="grid grid-cols-3 gap-6">
+                                {stats.map((stat) => (
+                                    <div key={stat.label} className="text-center">
+                                        <p className="text-2xl font-bold text-indigo-400 sm:text-3xl">{stat.value}</p>
+                                        <p className="mt-1 text-sm font-medium text-gray-400">{stat.label}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>*/}
+                    </div>
+
+                    {/* Визуален елемент (Изображение или 3D Модел) */}
+                    <div className="mt-12 lg:col-span-6 lg:mt-0 flex justify-center items-center">
+                        {/* Тук може да добавиш 3D модел, анимирана графика или впечатляващо изображение */}
+                        <div className="w-full flex items-center justify-center p-6">
+                            <span className="text-indigo-200 text-xl font-semibold">
+                                <img src="https://www.i-s-p.co.uk/wp-content/uploads/2022/10/Globe-v5.gif" className="h-120 min-w-120" alt="crypto" />
+                            </span>
+                        </div>
+                    </div>
+
                 </div>
-              )}
-               {showResults && searchResults.length === 0 && searchTerm.length > 0 && (
-                   <div className="absolute z-10 mt-12 w-3/4 rounded-md bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5">
-                  <div className="py-1 px-4 text-sm text-gray-400">Няма намерени резултати.</div>
-                </div>
-              )}
-
-              </div>
             </div>
-
-            {/* Секция със Статистики */}
-            <div className="mt-12">
-              <div className="grid grid-cols-3 gap-6">
-                {stats.map((stat) => (
-                  <div key={stat.label} className="text-center">
-                    <p className="text-2xl font-bold text-indigo-400 sm:text-3xl">{stat.value}</p>
-                    <p className="mt-1 text-sm font-medium text-gray-400">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          
-          {/* Визуален елемент (Изображение или 3D Модел) */}
-          <div className="mt-12 lg:col-span-6 lg:mt-0 flex justify-center items-center">
-            {/* Тук може да добавиш 3D модел, анимирана графика или впечатляващо изображение */}
-            <div className="w-full flex items-center justify-center p-6">
-              <span className="text-indigo-200 text-xl font-semibold">
-                
-
-
-
-                <img src="https://www.i-s-p.co.uk/wp-content/uploads/2022/10/Globe-v5.gif" className="h-120 min-w-120" alt="crypto" />
-
-
-              </span>
-            </div>
-          </div>
-          
         </div>
-      </div>
-    </div>
-  );
+    );
 };
