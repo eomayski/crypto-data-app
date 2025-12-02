@@ -60,14 +60,13 @@ export default function CryptoHero () {
           <div className="lg:col-span-6">
             {/* Заглавие */}
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-              <span className="block xl:inline">Децентрализирано за</span>{' '}
-              <span className="block text-indigo-400 xl:inline">по-добро утре</span>
+              <span className="block xl:inline">Познавай своето</span>{' '}
+              <span className="block text-indigo-400 xl:inline">крипто</span>
             </h1>
 
             {/* Описание */}
             <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-              Купувайте, търгувайте и съхранявайте над 600 криптовалути с лекота и сигурност. 
-              Започнете своето пътешествие в света на Web3 днес.
+              Следете най-новите тенденции в света на децентрализираните активи. Изградете и следете своето крипто потфолио.
             </p>
 
             {/* Поле за търсене и резултати */}
@@ -128,13 +127,13 @@ export default function CryptoHero () {
           {/* Визуален елемент (Изображение или 3D Модел) */}
           <div className="mt-12 lg:col-span-6 lg:mt-0 flex justify-center items-center">
             {/* Тук може да добавиш 3D модел, анимирана графика или впечатляващо изображение */}
-            <div className="h-64 w-full rounded-lg bg-indigo-900/50 flex items-center justify-center p-6 shadow-2xl">
+            <div className="w-full flex items-center justify-center p-6">
               <span className="text-indigo-200 text-xl font-semibold">
                 
 
 
 
-[Image of Cryptocurrency 3D Chart or abstract crypto design]
+                <img src="https://www.i-s-p.co.uk/wp-content/uploads/2022/10/Globe-v5.gif" className="h-120 min-w-120" alt="crypto" />
 
 
               </span>
