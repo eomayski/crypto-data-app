@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export default function CryptoHero () {
   // Примерен масив за статистики
   const stats = [
@@ -6,12 +8,55 @@ export default function CryptoHero () {
     { label: 'Регистрирани потребители', value: '90 млн.' },
   ];
 
+  // Примерен масив с криптовалути за търсене
+  const cryptoAssets = [
+    { id: 'bitcoin', symbol: 'BTC', name: 'Bitcoin', logo: 'https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579', detailsLink: '/crypto/bitcoin' },
+    { id: 'ethereum', symbol: 'ETH', name: 'Ethereum', logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', detailsLink: '/crypto/ethereum' },
+    { id: 'cardano', symbol: 'ADA', name: 'Cardano', logo: 'https://assets.coingecko.com/coins/images/975/small/cardano.png?1547034860', detailsLink: '/crypto/cardano' },
+    { id: 'binancecoin', symbol: 'BNB', name: 'BNB', logo: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png?1547034615', detailsLink: '/crypto/binancecoin' },
+    { id: 'ripple', symbol: 'XRP', name: 'XRP', logo: 'https://assets.coingecko.com/coins/images/44/standard/xrp-symbol-white-128.png?1696501442', detailsLink: '/crypto/ripple' },
+    { id: 'solana', symbol: 'SOL', name: 'Solana', logo: 'https://assets.coingecko.com/coins/images/4128/small/solana.png?1640133427', detailsLink: '/crypto/solana' },
+    { id: 'dogecoin', symbol: 'DOGE', name: 'Dogecoin', logo: 'https://assets.coingecko.com/coins/images/5/small/dogecoin.png?1547033577', detailsLink: '/crypto/dogecoin' },
+  ];
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [showResults, setShowResults] = useState(false);
+
+  const handleSearchChange = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+
+    if (value.length > 0) {
+      const filteredResults = cryptoAssets.filter(asset =>
+        asset.name.toLowerCase().includes(value.toLowerCase()) ||
+        asset.symbol.toLowerCase().includes(value.toLowerCase())
+      );
+      setSearchResults(filteredResults);
+      setShowResults(true);
+    } else {
+      setSearchResults([]);
+      setShowResults(false);
+    }
+  };
+
+  const handleInputFocus = () => {
+    if (searchTerm.length > 0) {
+      setShowResults(true);
+    }
+  };
+
+  const handleInputBlur = () => {
+    // Малко забавяне, за да позволи клик върху резултат преди да скрие
+    setTimeout(() => setShowResults(false), 100); 
+  };
+
   return (
     <div className="bg-gray-900 text-white">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
           
-          {/* Съдържание на Hero секцията (Заглавие, Описание, CTA) */}
+          {/* Съдържание на Hero секцията (Заглавие, Описание, Търсене) */}
           <div className="lg:col-span-6">
             {/* Заглавие */}
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
@@ -25,23 +70,45 @@ export default function CryptoHero () {
               Започнете своето пътешествие в света на Web3 днес.
             </p>
 
-            {/* Бутони за призив за действие (CTA) */}
-            <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
-              <div className="rounded-md shadow">
-                <a
-                  href="#"
-                  className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
-                >
-                  Започни търговия
-                </a>
-              </div>
-              <div className="mt-3 rounded-md shadow sm:ml-3 sm:mt-0">
-                <a
-                  href="#"
-                  className="flex w-full items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-indigo-600 hover:bg-gray-50 md:py-4 md:px-10 md:text-lg"
-                >
-                  Научи повече
-                </a>
+            {/* Поле за търсене и резултати */}
+            <div className="mt-10 relative">
+              <div className="flex justify-center rounded-md shadow-sm">
+                <input
+                  type="text"
+                  name="crypto-search"
+                  id="crypto-search"
+                  className="block rounded-md w-3/4 border-gray-300 bg-gray-700 text-white focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3"
+                  placeholder="Търси криптовалути (напр. BTC, Ethereum)"
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
+                  />
+              {/* Показване на резултати */}
+              {showResults && searchResults.length > 0 && (
+                  <div className="absolute mt-12 w-3/4 rounded-md bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5">
+                  <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                    {searchResults.map((asset) => (
+                        <a
+                        key={asset.id}
+                        href={asset.detailsLink}
+                        className="flex items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 hover:text-white"
+                        role="menuitem"
+                        >
+                        <img src={asset.logo} alt={asset.name} className="h-6 w-6 mr-3" />
+                        <span className="font-semibold">{asset.symbol}</span>
+                        <span className="ml-2 text-gray-400"> - {asset.name}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+               {showResults && searchResults.length === 0 && searchTerm.length > 0 && (
+                   <div className="absolute z-10 mt-12 w-3/4 rounded-md bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5">
+                  <div className="py-1 px-4 text-sm text-gray-400">Няма намерени резултати.</div>
+                </div>
+              )}
+
               </div>
             </div>
 
@@ -65,11 +132,13 @@ export default function CryptoHero () {
               <span className="text-indigo-200 text-xl font-semibold">
                 
 
+
+
 [Image of Cryptocurrency 3D Chart or abstract crypto design]
+
 
               </span>
             </div>
-            
           </div>
           
         </div>
