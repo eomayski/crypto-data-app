@@ -1,12 +1,13 @@
-import Carousel from "./components/Carousel.jsx";
-import CryptoHero from "./components/CryptoHero.jsx";
+import { Route, Routes } from "react-router";
+import Home from "./components/home/Home.jsx";
 
 export default function App() {
 
   return (
 <>
-    <CryptoHero/>
-    <Carousel/>
+    <Routes>
+    <Route path="/" element={<Home/>} />
+    </Routes>
 </>
   )
 }
