@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react'; // For icons (Menu, Close)
 
 const Navigation = [
   { name: 'News', to: '/news' },
-  { name: 'Trades', to: '/trades' },
+  { name: 'Traders', to: '/trades' },
   { name: 'Portfolio', to: '/portfolio' },
 ];
 
@@ -14,13 +14,13 @@ export default function Header(){
   return (
     <header className="sticky top-0 z-40 mr-6 ml-6 rounded-b-lg backdrop-filter backdrop-blur-lg shadow-lg bg-[#9b87f533] transition duration-300 ease-in-out">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           
           {/* Logo / Title */}
           <div className="flex-shrink-0">
             {/* Using Link for home navigation */}
             <Link to="/" className="text-xl font-bold text-white tracking-wider">
-              CRYPTO-DATA
+              <img src="favicon.png" alt="Crypto-Data" className='w-18' />
             </Link>
           </div>
           

@@ -3,3 +3,7 @@
 body {
     background-color: oklch(21% 0.034 264.665);
 }
+
+.slick-list {
+    overflow: visible !important;
+}

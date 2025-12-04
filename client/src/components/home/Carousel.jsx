@@ -51,11 +51,11 @@ export default function Carousel() {
     };
     return (
         <div className="">
-        <div className="bg-gray-900 text-white pl-6 lg:-mt-16 mt-16">
+        <div className="bg-gray-900 text-white pl-6 lg:-mt-16 mt-16" >
             <Slider {...settings}>
                 {topCoins.map((item) => (
                     <div key={item.ID} className="pr-6">
-                        <div className="px-5 py-6 bg-[#9b87f533] bg-opacity-20 rounded-xl">
+                        <div className="px-5 py-6 bg-[#9b87f533] bg-opacity-20 rounded-xl transform transition duration-300 hover:-translate-y-3 hover:shadow-xl">
                             <div className="flex items-center gap-5">
                                 <div
                                     className={`bg-gray-700 px-2 py-2 rounded-full`}

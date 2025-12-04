@@ -82,7 +82,7 @@ export default function CryptoHero() {
   
 
     return (
-        <div className="bg-gray-900 text-white">
+        <div className="text-white">
             <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
                 <div className="lg:grid lg:grid-cols-12 lg:gap-8">
 
