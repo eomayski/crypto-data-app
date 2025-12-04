@@ -11,11 +11,8 @@ const Navigation = [
 export default function Header(){
   const [isOpen, setIsOpen] = useState(false);
 
-  // Classes for the Glassmorphism effect
-  const glassClasses = "backdrop-filter backdrop-blur-lg shadow-lg";
-
   return (
-    <header className={`sticky top-0 z-40 mr-6 ml-6 rounded-b-lg ${glassClasses} bg-[#9b87f533] transition duration-300 ease-in-out`}>
+    <header className="sticky top-0 z-40 mr-6 ml-6 rounded-b-lg backdrop-filter backdrop-blur-lg shadow-lg bg-[#9b87f533] transition duration-300 ease-in-out">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           
@@ -43,9 +40,8 @@ export default function Header(){
               ))}
             </nav>
 
-            {/* Authentication/Utility Links (Example: Logout is usually conditional) */}
+            {/* Authentication Links */}
             <div className="flex space-x-4 ml-6">
-                {/* Example: Conditional rendering for Logout, or use a proper button */}
                 <Link 
                     to="/logout" 
                     className="px-3 py-1 text-sm font-medium rounded-md bg-transparent border border-white/30 hover:bg-white/10 text-white transition duration-150 ease-in-out"
@@ -82,32 +78,32 @@ export default function Header(){
 
       {/* Mobile Menu Panel */}
       {isOpen && (
-        <div className={`md:hidden ${glassClasses} bg-opacity-90`}>
+        <div className="md:hidden backdrop-filter backdrop-blur-lg shadow-lg bg-opacity-90">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {/* Main Navigation */}
             {Navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.to}
-                className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white hover:bg-opacity-10"
+                className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10 hover:bg-opacity-10"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
             
-            {/* Auth/Utility Links */}
+            {/* Auth Links */}
              <div className="pt-2 border-t border-white/10">
                 <Link 
                     to="/logout" 
-                    className="block px-3 py-2 text-base font-medium text-white hover:bg-white hover:bg-opacity-10 rounded-md"
+                    className="block w-full text-left px-3 py-2 text-base font-medium rounded-md border border-white/30 hover:bg-white/10 text-white mt-2"
                     onClick={() => setIsOpen(false)}
                 >
                     Logout
                 </Link>
                 <Link 
                     to="/login" 
-                    className="block w-full text-left px-3 py-2 text-base font-medium rounded-md bg-indigo-600 hover:bg-indigo-700 text-white mt-2"
+                    className="block w-full text-left px-3 py-2 text-base font-medium rounded-md border border-white/30 hover:bg-white/10 text-white mt-2"
                     onClick={() => setIsOpen(false)}
                 >
                     Login

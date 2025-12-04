@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-// URL на API за търсене
+import { Link } from "react-router";
+
 const COINDESK_SEARCH_API = 'https://data-api.coindesk.com/asset/v1/search';
-// Интервал за debouncing в милисекунди
+
+// Debouncing delay
 const DEBOUNCE_DELAY = 500;
 
 export default function CryptoHero() {
@@ -10,8 +12,8 @@ export default function CryptoHero() {
   const [isLoading, setIsLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
 
-  // Примерен масив за статистики (запазваме го)
-  const stats = [
+  // Benefits
+  const benefits = [
     { label: '24h Обем на търговия', value: '$76 млрд+' },
     { label: 'Листвани криптовалути', value: '600+' },
     { label: 'Регистрирани потребители', value: '90 млн.' },
@@ -85,18 +87,18 @@ export default function CryptoHero() {
                 <div className="lg:grid lg:grid-cols-12 lg:gap-8">
 
                     <div className="lg:col-span-6">
-                        {/* Заглавие */}
+                        {/* Title */}
                         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
                             <span className="block xl:inline">Know your</span>{' '}
                             <span className="block text-indigo-400 xl:inline">Crypto</span>
                         </h1>
 
-                        {/* Описание */}
+                        {/* Description */}
                         <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
                             Follow the latest trends in the world of decentralized assets. <br /> Build and monitor your crypto portfolio.
                         </p>
 
-                        {/* Поле за търсене и резултати */}
+                        {/* Search Field */}
                         <div className="mt-10 relative">
                             <div className="flex justify-center">
                                 <input
@@ -110,50 +112,55 @@ export default function CryptoHero() {
                                     onFocus={handleInputFocus}
                                     onBlur={handleInputBlur}
                                 />
-                                {/* Показване на резултати */}
+                                {/* Results */}
                                 {showResults && searchResults.length > 0 && (
                                     <div className="absolute mt-12 w-3/4 rounded-md bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5">
                                         <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                                             {searchResults.map((asset) => (
-                                                <a
+                                                <Link
                                                     key={asset.id}
-                                                    href={asset.detailsLink}
+                                                    to={asset.detailsLink}
                                                     className="flex items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 hover:text-white"
                                                     role="menuitem"
                                                 >
                                                     <img src={asset.logo} alt={asset.symbol} className="h-6 w-6 mr-3" />
                                                     <span className="font-semibold">{asset.symbol}</span>
                                                     <span className="ml-2 text-gray-400"> - {asset.name}</span>
-                                                </a>
+                                                </Link>
                                             ))}
                                         </div>
                                     </div>
                                 )}
                                 {showResults && searchResults.length === 0 && searchTerm.length > 0 && (
                                     <div className="absolute z-10 mt-12 w-3/4 rounded-md bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5">
-                                        <div className="py-1 px-4 text-sm text-gray-400">Няма намерени резултати.</div>
+                                        <div className="py-1 px-4 text-sm text-gray-400">Nothing found!</div>
+                                    </div>
+                                )}
+
+                                {isLoading && (
+                                    <div className="absolute z-10 mt-12 w-3/4 rounded-md bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5">
+                                        <div className="py-1 px-4 text-sm text-gray-400">Loading results...</div>
                                     </div>
                                 )}
 
                             </div>
                         </div>
 
-                        {/* Секция със Статистики 
+                        {/* Benefits Section 
                         <div className="mt-12">
                             <div className="grid grid-cols-3 gap-6">
-                                {stats.map((stat) => (
-                                    <div key={stat.label} className="text-center">
-                                        <p className="text-2xl font-bold text-indigo-400 sm:text-3xl">{stat.value}</p>
-                                        <p className="mt-1 text-sm font-medium text-gray-400">{stat.label}</p>
+                                {benefits.map((benefit) => (
+                                    <div key={benefit.label} className="text-center">
+                                        <p className="text-2xl font-bold text-indigo-400 sm:text-3xl">{benefit.value}</p>
+                                        <p className="mt-1 text-sm font-medium text-gray-400">{benefit.label}</p>
                                     </div>
                                 ))}
                             </div>
                         </div>*/}
                     </div>
 
-                    {/* Визуален елемент (Изображение или 3D Модел) */}
+                    {/* Visual Element */}
                     <div className="mt-12 lg:col-span-6 lg:mt-0 flex justify-center items-center">
-                        {/* Тук може да добавиш 3D модел, анимирана графика или впечатляващо изображение */}
                         <div className="w-full flex items-center justify-center p-6">
                             <span className="text-indigo-200 text-xl font-semibold">
                                 <img src="https://www.i-s-p.co.uk/wp-content/uploads/2022/10/Globe-v5.gif" className="h-120 min-w-120" alt="crypto" />
