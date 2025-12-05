@@ -5,5 +5,11 @@ body {
 }
 
 .slick-list {
-    overflow: visible !important;
+    height: 200px;
 }
+
+.slick-slide {
+    height: 80%;;
+}
+
+

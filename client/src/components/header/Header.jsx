@@ -3,8 +3,8 @@ import { Link } from 'react-router';
 import { Menu, X } from 'lucide-react'; // For icons (Menu, Close)
 
 const Navigation = [
-  { name: 'News', to: '/news' },
-  { name: 'Traders', to: '/trades' },
+  { name: 'News', to: '#latest-news' },
+  { name: 'Traders', to: '/traders' },
   { name: 'Portfolio', to: '/portfolio' },
 ];
 

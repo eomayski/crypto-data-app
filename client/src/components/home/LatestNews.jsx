@@ -17,7 +17,7 @@ const [latestNews, setLatestNews] = useState([])
 
 
   return (
-    <section className="py-16 bg-gray-900 text-white">
+    <section id="latest-news" className="py-16 bg-gray-900 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold text-white text-center mb-12">
             <span className="block xl:inline">Latest</span>{' '}
