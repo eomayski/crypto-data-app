@@ -20,9 +20,9 @@ const [latestNews, setLatestNews] = useState([])
     <section id="latest-news" className="py-16 bg-gray-900 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold text-white text-center mb-12">
-            <span className="block xl:inline">Latest</span>{' '}
-            <span className="block text-indigo-400 xl:inline">Crypto</span>{' '}
-            <span className="block xl:inline">News</span>
+            <span className="xl:inline">Latest</span>{' '}
+            <span className="text-indigo-400 xl:inline">Crypto</span>{' '}
+            <span className="xl:inline">News</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

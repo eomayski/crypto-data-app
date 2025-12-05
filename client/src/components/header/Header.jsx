@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { Link } from 'react-router'; 
 import { Menu, X } from 'lucide-react'; // For icons (Menu, Close)
 
+//TODO check active link!
 const Navigation = [
-  { name: 'News', to: '#latest-news' },
-  { name: 'Traders', to: '/traders' },
-  { name: 'Portfolio', to: '/portfolio' },
+  { name: 'News', to: '/latest-news', style: `${null ? "active" : ""}` },
+  { name: 'Traders', to: '/traders', style: `${null ? "active" : ""}`  },
+  { name: 'Portfolio', to: '/portfolio', style: `${null ? "active" : ""}`  },
 ];
+
+console.log(Navigation);
 
 export default function Header(){
   const [isOpen, setIsOpen] = useState(false);
