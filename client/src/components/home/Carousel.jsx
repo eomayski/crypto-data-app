@@ -2,6 +2,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 
 
@@ -55,6 +56,7 @@ export default function Carousel() {
             <Slider {...settings}>
                 {topCoins.map((item) => (
                     <div key={item.ID} className="pr-6">
+                        <Link to={`/crypto/${item.SYMBOL}`}>
                         <div className="px-5 py-6 bg-[#9b87f533] bg-opacity-20 rounded-xl transform transition duration-300 hover:translate-y-3 hover:shadow-xl">
                             <div className="flex items-center gap-5">
                                 <div
@@ -82,6 +84,7 @@ export default function Carousel() {
                                 </div>
                             </div>
                         </div>
+                        </Link>
                     </div>
                 ))}
             </Slider>

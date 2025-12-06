@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import NewsCard from "./NewsCard.jsx";
 
 
-export default function LatestNews({count, symbol}) {
+export default function LatestNews({count, name, symbol}) {
 const [latestNews, setLatestNews] = useState([])
 const [isLoading, setIsLoading] = useState(true);
     
     
-    const URL = symbol ?  `https://data-api.coindesk.com/news/v1/search?search_string=${symbol}&lang=EN&limit=${count}&source_key=bitcoinist` : `https://data-api.coindesk.com/news/v1/article/list?lang=EN&limit=${count}&source_ids=bitcoinist` 
+    const URL = symbol ?  `https://data-api.coindesk.com/news/v1/article/list?lang=EN&limit=${count}&categories=${symbol}&source_ids=bitcoinist` : `https://data-api.coindesk.com/news/v1/article/list?lang=EN&limit=${count}&source_ids=bitcoinist` 
 
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const [isLoading, setIsLoading] = useState(true);
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold text-white text-center mb-12">
             <span className="xl:inline">Latest</span>{' '}
-            <span className="text-indigo-400 xl:inline">{symbol ? `${symbol}` : 'Crypto'}</span>{' '}
+            <span className="text-indigo-400 xl:inline">{name ? `${name}` : 'Crypto'}</span>{' '}
             <span className="xl:inline">News</span>
         </h2>
 
