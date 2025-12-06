@@ -30,7 +30,6 @@ export default function NewsDetails() {
     <div className="min-h-screen bg-gray-900 text-white py-12">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         
-        {/* Може да добавиш и обща проверка за зареждане */}
         {Object.keys(news).length === 0 ? (
             <div className="text-center text-xl text-indigo-400">Loading news details...</div>
         ) : (
@@ -80,9 +79,7 @@ export default function NewsDetails() {
                 </div>
 
                 <div className="text-lg leading-relaxed text-gray-300">
-                    <p className="whitespace-pre-line">
-                        {news.BODY}
-                    </p>
+                    {news.BODY.split('. ').map(p => <p className="whitespace-pre-line text-justify indent-5 mb-2">{p}.</p>)}
                 </div>
             </>
         )}
