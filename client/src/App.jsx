@@ -8,14 +8,14 @@ import NewsDetails from "./components/news/NewsDetails.jsx";
 export default function App() {
 
     return (
-        <>
+        <div className="wrapper">
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/latest-news" element={<LatestNews count={9}/>} />
+                <Route path="/latest-news" element={<LatestNews count={12}/>} />
                 <Route path="/news/:newsId" element={<NewsDetails/>} />
             </Routes>
             <Footer />
-        </>
+        </div>
     )
 }

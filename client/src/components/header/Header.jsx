@@ -9,8 +9,6 @@ const Navigation = [
   { name: 'Portfolio', to: '/portfolio', style: `${null ? "active" : ""}`  },
 ];
 
-console.log(Navigation);
-
 export default function Header(){
   const [isOpen, setIsOpen] = useState(false);
 
