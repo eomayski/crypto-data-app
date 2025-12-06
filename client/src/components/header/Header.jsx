@@ -23,7 +23,7 @@ export default function Header(){
           <div className="flex-shrink-0">
             {/* Using Link for home navigation */}
             <Link to="/" className="text-xl font-bold text-white tracking-wider">
-              <img src="favicon.png" alt="Crypto-Data" className='w-18' />
+              <img src="/images/logo.png" alt="Crypto-Data" className='w-18' />
             </Link>
           </div>
           

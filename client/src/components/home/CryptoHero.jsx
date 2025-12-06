@@ -12,12 +12,12 @@ export default function CryptoHero() {
   const [isLoading, setIsLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
 
-  // Benefits
-  const benefits = [
-    { label: '24h Обем на търговия', value: '$76 млрд+' },
-    { label: 'Листвани криптовалути', value: '600+' },
-    { label: 'Регистрирани потребители', value: '90 млн.' },
-  ];
+//   // Benefits
+//   const benefits = [
+//     { label: '24h Обем на търговия', value: '$76 млрд+' },
+//     { label: 'Листвани криптовалути', value: '600+' },
+//     { label: 'Регистрирани потребители', value: '90 млн.' },
+//   ];
   
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -47,8 +47,6 @@ export default function CryptoHero() {
       const data = await response.json();
       
       const assets = data.Data.LIST || []; 
-
-      console.log(assets);
       
       setSearchResults(assets.map(asset => ({
         id: asset.ID,
