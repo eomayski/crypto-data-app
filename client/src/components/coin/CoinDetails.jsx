@@ -17,7 +17,6 @@ export default function CoinDetails() {
     }, [coinId]);
 
 
-    // Примерни стойности и форматиране
     const defaultData = {
         logoUrl: 'https://via.placeholder.com/100x100?text=Logo',
         name: "Ethereum",
@@ -30,7 +29,6 @@ export default function CoinDetails() {
         description: "Ethereum is a decentralized, open-source blockchain system that features its own cryptocurrency, Ether. ETH works as a platform for numerous other cryptocurrencies, as well as for the execution of decentralized smart contracts.",
     };
 
-    // Форматиране на числа
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 4 }).format(amount);
     };
