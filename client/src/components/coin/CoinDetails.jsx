@@ -16,9 +16,6 @@ export default function CoinDetails() {
             .catch((err) => alert(err.message));
     }, [coinId]);
 
-    console.log(coin);
-
-
 
     // Примерни стойности и форматиране
     const defaultData = {
@@ -39,7 +36,6 @@ export default function CoinDetails() {
     };
 
     const formatPercentage = (percent) => {
-        // Определяне на цвета на текста според знака
         const colorClass = percent >= 0 ? 'text-green-400' : 'text-red-500';
         return (
             <span className={colorClass}>
@@ -56,12 +52,9 @@ export default function CoinDetails() {
             <div className="bg-gray-900 text-white py-12">
                 <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
 
-                    {/* ======================================================= */}
-                    {/* ГОРНА ЧАСТ: Лого и Ключови Метрики (Ляво/Дясно) */}
-                    {/* ======================================================= */}
+
                     <div className="flex flex-col md:flex-row gap-8 mb-10 p-6 bg-gray-800 rounded-xl shadow-2xl">
 
-                        {/* ЛЯВА СЕКЦИЯ: Лого, Име и Символ */}
                         <div className="w-full md:w-1/3 flex flex-col items-center md:items-start border-b md:border-b-0 md:border-r border-gray-700 pb-4 md:pb-0 md:pr-4">
                             <img
                                 src={coin.LOGO_URL}
@@ -75,7 +68,6 @@ export default function CoinDetails() {
                                 ({coin.SYMBOL})
                             </p>
 
-                            {/* Уебсайт */}
                             <a
                                 href={coin.WEBSITE_URL}
                                 target="_blank"
@@ -87,22 +79,18 @@ export default function CoinDetails() {
                             </a>
                         </div>
 
-                        {/* ДЯСНА СЕКЦИЯ: Финансови Метрики */}
                         <div className="w-full md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-                            {/* 1. Цена */}
                             <div className="flex flex-col p-3 bg-gray-700 rounded-lg">
                                 <span className="text-sm font-medium text-gray-400">Current Price</span>
                                 <span className="text-2xl font-bold text-white mt-1">{formatCurrency(coin.PRICE_USD)}</span>
                             </div>
 
-                            {/* 2. Пазарна Капитализация */}
                             <div className="flex flex-col p-3 bg-gray-700 rounded-lg">
                                 <span className="text-sm font-medium text-gray-400">Market Cap</span>
                                 <span className="lg:text-xl text-m font-bold text-white mt-1 " >{formatCurrency(coin.CIRCULATING_MKT_CAP_USD)}</span>
                             </div>
 
-                            {/* 3. Промяна в Долари (24ч) */}
                             <div className="flex flex-col p-3 bg-gray-700 rounded-lg">
                                 <span className="text-sm font-medium text-gray-400">Price Change (24h, $)</span>
                                 <span className={`text-xl font-bold mt-1 ${priceChangeColor}`}>
@@ -110,7 +98,6 @@ export default function CoinDetails() {
                                 </span>
                             </div>
 
-                            {/* 4. Промяна в Проценти (24ч) */}
                             <div className="flex flex-col p-3 bg-gray-700 rounded-lg">
                                 <span className="text-sm font-medium text-gray-400">Price Change (24h, %)</span>
                                 <span className="text-xl font-bold mt-1">
@@ -119,10 +106,6 @@ export default function CoinDetails() {
                             </div>
                         </div>
                     </div>
-
-                    {/* ======================================================= */}
-                    {/* ДОЛНА ЧАСТ: Описание */}
-                    {/* ======================================================= */}
 
                     <div className="bg-gray-800 p-6 rounded-xl shadow-2xl">
                         <h2 className="text-2xl font-extrabold text-white mb-4 border-b border-indigo-500 pb-2">
