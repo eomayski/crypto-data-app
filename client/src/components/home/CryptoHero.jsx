@@ -11,14 +11,6 @@ export default function CryptoHero() {
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
-
-//   // Benefits
-//   const benefits = [
-//     { label: '24h Обем на търговия', value: '$76 млрд+' },
-//     { label: 'Листвани криптовалути', value: '600+' },
-//     { label: 'Регистрирани потребители', value: '90 млн.' },
-//   ];
-  
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       if (searchTerm.length > 1) {
@@ -41,7 +33,7 @@ export default function CryptoHero() {
       const response = await fetch(`${COINDESK_SEARCH_API}?search_string=${value}&limit=5`);
       
       if (!response.ok) {
-        throw new Error('Грешка при извличане на данни от CoinDesk');
+        throw new Error('No Data from CoinDesk');
       }
 
       const data = await response.json();
@@ -53,7 +45,7 @@ export default function CryptoHero() {
         symbol: asset.SYMBOL, 
         name: asset.NAME,
         logo: asset.LOGO_URL, 
-        detailsLink: `/crypto/${asset.URI.toLowerCase()}`,
+        detailsLink: `/crypto/${asset.SYMBOL}`,
       })));
 
     } catch (error) {
@@ -143,18 +135,6 @@ export default function CryptoHero() {
 
                             </div>
                         </div>
-
-                        {/* Benefits Section 
-                        <div className="mt-12">
-                            <div className="grid grid-cols-3 gap-6">
-                                {benefits.map((benefit) => (
-                                    <div key={benefit.label} className="text-center">
-                                        <p className="text-2xl font-bold text-indigo-400 sm:text-3xl">{benefit.value}</p>
-                                        <p className="mt-1 text-sm font-medium text-gray-400">{benefit.label}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>*/}
                     </div>
 
                     {/* Visual Element */}

@@ -18,9 +18,10 @@ const [isLoading, setIsLoading] = useState(true);
                 setIsLoading(false);
             })
             .catch((err) => alert(err.message));
-    }, [URL]);
+    }, []);
     
-
+    console.log(latestNews);
+    
   return (
     <section id="latest-news" className="py-16 bg-gray-900 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

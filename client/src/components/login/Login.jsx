@@ -1,4 +1,38 @@
+import { useNavigate } from "react-router";
+import useForm from "../../hooks/useForm";
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
+
+
+
+
 export default function Login() {
+
+    const navigate = useNavigate();
+    const { loginHandler } = useContext(UserContext);
+
+    const submitHandler = async ({ email, password }) => {
+        if (!email || !password) {
+            return alert('Email and password are required!');
+        }
+
+        try {
+            await loginHandler(email, password);
+
+            navigate('/');
+        } catch (err) {
+            alert(err.message);
+        }
+    }
+
+    const {
+        register,
+        formAction,
+    } = useForm(submitHandler, {
+        email: '',
+        password: '',
+    });
+
     return (
         <div className="flex flex-grow items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-md w-full space-y-8 bg-gray-800 p-10 rounded-xl shadow-2xl border border-indigo-500/30">
@@ -14,16 +48,16 @@ export default function Login() {
                         </p>
                     </div>
 
-                    <form className="mt-8 space-y-6">
+                    <form id="login" className="mt-8 space-y-6" action={formAction}>
 
                         <div className="rounded-md shadow-sm -space-y-px">
 
                             {/* Email Field */}
                             <div className="mb-3">
-                                <label htmlFor="email-login" className="sr-only">Email address</label>
+                                <label htmlFor="email-login" className="sr-only">Email</label>
                                 <input
                                     id="email-login"
-                                    name="email"
+                                    {...register('email')}
                                     type="email"
                                     autoComplete="email"
                                     required
@@ -37,7 +71,7 @@ export default function Login() {
                                 <label htmlFor="password-login" className="sr-only">Password</label>
                                 <input
                                     id="password-login"
-                                    name="password"
+                                    {...register('password')}
                                     type="password"
                                     autoComplete="current-password"
                                     required

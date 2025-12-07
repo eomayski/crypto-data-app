@@ -8,26 +8,15 @@ export default function CoinDetails() {
     const [coin, setCoin] = useState({})
 
     useEffect(() => {
-        fetch(`https://data-api.coindesk.com/asset/v2/metadata?assets=${coinId}&quote_asset=USD&asset_language=en-US&asset_lookup_priority=URI`)
+        fetch(`https://data-api.coindesk.com/asset/v2/metadata?assets=${coinId}&quote_asset=USD&asset_language=en-US&asset_lookup_priority=SYMBOL`)
             .then(response => response.json())
             .then(result => {
                 setCoin(result.Data[coinId]);
             })
             .catch((err) => alert(err.message));
-    }, [coinId]);
+    }, []);
 
 
-    const defaultData = {
-        logoUrl: 'https://via.placeholder.com/100x100?text=Logo',
-        name: "Ethereum",
-        symbol: "ETH",
-        website: "https://ethereum.org",
-        marketCap: 450000000000,
-        price: 3950.78,
-        priceChangeDollar: 150.25,
-        priceChangePercent: 3.95,
-        description: "Ethereum is a decentralized, open-source blockchain system that features its own cryptocurrency, Ether. ETH works as a platform for numerous other cryptocurrencies, as well as for the execution of decentralized smart contracts.",
-    };
 
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 4 }).format(amount);
@@ -118,7 +107,7 @@ export default function CoinDetails() {
 
                 </div>
             </div>
-            <LatestNews count={3} name={coin.NAME} symbol={coin.SYMBOL} />
+            <LatestNews count={3} name={coin.NAME} symbol={coinId} />
         </>
     );
 }
