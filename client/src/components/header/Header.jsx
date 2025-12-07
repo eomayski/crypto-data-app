@@ -2,13 +2,6 @@ import { useState } from 'react';
 import { Link } from 'react-router'; 
 import { Menu, X } from 'lucide-react'; // For icons (Menu, Close)
 
-//TODO check active link!
-const Navigation = [
-  { name: 'News', to: '/latest-news', style: `${null ? "active" : ""}` },
-  { name: 'Traders', to: '/traders', style: `${null ? "active" : ""}`  },
-  { name: 'Portfolio', to: '/portfolio', style: `${null ? "active" : ""}`  },
-];
-
 export default function Header(){
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,17 +21,29 @@ export default function Header(){
           {/* Navigation and Auth Links for Desktop */}
           <div className="hidden md:flex md:items-center md:space-x-6">
             
-            {/* Main Navigation Links */}
+            {/* Main Navigation Links (Индивидуални елементи) */}
             <nav className="flex space-x-4">
-              {Navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.to}
-                  className="text-white hover:text-indigo-300 transition duration-150 ease-in-out text-sm font-medium p-2 rounded-md"
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {/* News Link */}
+              <Link
+                to="/latest-news"
+                className="text-white hover:text-indigo-300 transition duration-150 ease-in-out text-sm font-medium p-2 rounded-md"
+              >
+                News
+              </Link>
+              {/* Traders Link */}
+              <Link
+                to="/traders"
+                className="text-white hover:-indigo-300 transition duration-150 ease-in-out text-sm font-medium p-2 rounded-md"
+              >
+                Traders
+              </Link>
+              {/* Portfolio Link */}
+              <Link
+                to="/portfolio"
+                className="text-white hover:text-indigo-300 transition duration-150 ease-in-out text-sm font-medium p-2 rounded-md"
+              >
+                Portfolio
+              </Link>
             </nav>
 
             {/* Authentication Links */}
@@ -81,17 +86,33 @@ export default function Header(){
       {isOpen && (
         <div className="md:hidden backdrop-filter backdrop-blur-lg shadow-lg bg-opacity-90">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {/* Main Navigation */}
-            {Navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.to}
-                className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10 hover:bg-opacity-10"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {/* Main Navigation (Индивидуални елементи) */}
+            
+            {/* News Link - Mobile */}
+            <Link
+              to="/latest-news"
+              className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10 hover:bg-opacity-10"
+              onClick={() => setIsOpen(false)}
+            >
+              News
+            </Link>
+            {/* Traders Link - Mobile */}
+            <Link
+              to="/traders"
+              className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10 hover:bg-opacity-10"
+              onClick={() => setIsOpen(false)}
+            >
+              Traders
+            </Link>
+            {/* Portfolio Link - Mobile */}
+            <Link
+              to="/portfolio"
+              className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10 hover:bg-opacity-10"
+              onClick={() => setIsOpen(false)}
+            >
+              Portfolio
+            </Link>
+
             
             {/* Auth Links */}
              <div className="pt-2 border-t border-white/10">
