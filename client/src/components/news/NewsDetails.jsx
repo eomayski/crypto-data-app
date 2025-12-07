@@ -27,7 +27,7 @@ export default function NewsDetails() {
         : 'Loading...';
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white py-12">
+    <div className="flex-grow bg-gray-900 text-white py-12">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         
         {Object.keys(news).length === 0 ? (
@@ -79,7 +79,7 @@ export default function NewsDetails() {
                 </div>
 
                 <div className="text-lg leading-relaxed text-gray-300">
-                    {news.BODY.split('. ').map(p => <p className="whitespace-pre-line text-justify indent-5 mb-2">{p}.</p>)}
+                    {news.BODY.split('. ').map((p, i, arr) => <p key={i} className="whitespace-pre-line text-justify indent-5 mb-2">{p}.</p>)}
                 </div>
             </>
         )}
