@@ -8,8 +8,8 @@ export default function Logout() {
 
     logoutHandler()
         .then(() => navigate('/'))
-        .catch(() => {
-            alert('Problem with logout')
+        .catch((err) => {
+            console.log(err.message);
             navigate('/');
         })
 

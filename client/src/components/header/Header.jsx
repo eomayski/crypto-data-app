@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { CircleUserRound, Menu, X } from 'lucide-react';
 import { useUserContext } from '../../contexts/UserContext.jsx';
 
@@ -26,19 +26,21 @@ export default function Header() {
                         {/* Main Navigation Links (Индивидуални елементи) */}
                         <nav className="flex space-x-4">
                             {/* News Link */}
-                            <Link
+                            <NavLink
+                                style={({isActive}) => isActive ? {color: '#7c86ff'} : {} }
                                 to="/latest-news"
                                 className="text-white hover:text-indigo-300 transition duration-150 ease-in-out text-sm font-medium p-2 rounded-md"
                             >
                                 News
-                            </Link>
+                            </NavLink>
                             {/* Traders Link */}
-                            <Link
+                            <NavLink
+                                style={({isActive}) => isActive ? {color: '#7c86ff'} : {} }
                                 to="/traders"
                                 className="text-white hover:text-indigo-300 transition duration-150 ease-in-out text-sm font-medium p-2 rounded-md"
                             >
                                 Traders
-                            </Link>
+                            </NavLink   >
 
 
                             {/* {isAuthenticated &&
@@ -61,30 +63,33 @@ export default function Header() {
                                         >
                                             Logout
                                         </Link>
-                                        <Link
+                                        <NavLink
+                                            style={({isActive}) => isActive ? {color: '#7c86ff'} : {} }
                                             to="/portfolio"
                                             className="text-white hover:text-indigo-300 transition duration-150 ease-in-out text-sm font-medium rounded-md"
                                         >
                                             <CircleUserRound />
-                                        </Link>
+                                        </NavLink>
 
                                     </div>
                                 ) :
                                 (
                                     <div className="flex space-x-4 ml-6">
-                                        <Link
+                                        <NavLink
+                                            style={({isActive}) => isActive ? {backgroundColor: '#4f39f6'} : {} }
                                             to="/login"
                                             className="px-3 py-1 text-sm font-medium rounded-md bg-transparent border border-white/30 hover:bg-white/10 text-white transition duration-150 ease-in-out"
                                         >
                                             Login
-                                        </Link>
+                                        </NavLink>
 
-                                        <Link
+                                        <NavLink
+                                            style={({isActive}) => isActive ? {backgroundColor: '#4f39f6'} : {} }
                                             to="/register"
                                             className="px-3 py-1 text-sm font-medium rounded-md bg-transparent border border-white/30 hover:bg-white/10 text-white transition duration-150 ease-in-out"
                                         >
                                             Register
-                                        </Link>
+                                        </NavLink>
                                     </div>
                                 )
                             }

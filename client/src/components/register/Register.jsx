@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 export default function Register() {
     return (
         <div className="flex flex-grow items-center justify-center px-4 sm:px-6 lg:px-8">
@@ -8,9 +10,9 @@ export default function Register() {
                     </h2>
                     <p className="mt-2 text-center text-sm text-gray-400">
                         Already have an account?{' '}
-                        <a href="/login" className="font-medium text-indigo-400 hover:text-indigo-300">
+                        <Link to="/login" className="font-medium text-indigo-400 hover:text-indigo-300">
                             Sign in
-                        </a>
+                        </Link>
                     </p>
                 </div>
 
@@ -28,7 +30,7 @@ export default function Register() {
                                 autoComplete="email"
                                 required
                                 className="appearance-none relative block w-full px-3 py-3 border border-gray-600 placeholder-gray-500 text-white bg-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-t-md"
-                                placeholder="Email address"
+                                placeholder="Email address*"
                             />
                         </div>
 
@@ -42,12 +44,12 @@ export default function Register() {
                                 autoComplete="new-password"
                                 required
                                 className="appearance-none relative block w-full px-3 py-3 border border-gray-600 placeholder-gray-500 text-white bg-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-none"
-                                placeholder="Password"
+                                placeholder="Password*"
                             />
                         </div>
 
                         {/* Confirm Password Field */}
-                        <div>
+                        <div className="mb-3">
                             <label htmlFor="confirm-password-register" className="sr-only">Confirm Password</label>
                             <input
                                 id="confirm-password-register"
@@ -55,8 +57,31 @@ export default function Register() {
                                 type="password"
                                 autoComplete="new-password"
                                 required
+                                className="appearance-none relative block w-full px-3 py-3 border border-gray-600 placeholder-gray-500 text-white bg-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-none"
+                                placeholder="Confirm Password*"
+                            />
+                        </div>
+
+                        {/* Username Field */}
+                         <div className="mb-3">
+                            <label htmlFor="username-register" className="sr-only">Username</label>
+                            <input
+                                id="username-register"
+                                name="username"
+                                className="appearance-none relative block w-full px-3 py-3 border border-gray-600 placeholder-gray-500 text-white bg-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-none"
+                                placeholder="Username"
+                            />
+                        </div>
+
+                        {/* Avatar Field */}
+                        <div className="mb-3">
+                            <label htmlFor="avatar-register" className="sr-only">Avatar</label>
+                            <input
+                                id="avatar-register"
+                                name="avatarUrl"
+                                type="email"
                                 className="appearance-none relative block w-full px-3 py-3 border border-gray-600 placeholder-gray-500 text-white bg-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-b-md"
-                                placeholder="Confirm Password"
+                                placeholder="Avatar URL"
                             />
                         </div>
                     </div>

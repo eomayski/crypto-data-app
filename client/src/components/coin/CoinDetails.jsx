@@ -8,13 +8,19 @@ export default function CoinDetails() {
     const [coin, setCoin] = useState({})
 
     useEffect(() => {
-        fetch(`https://data-api.coindesk.com/asset/v2/metadata?assets=${coinId}&quote_asset=USD&asset_language=en-US&asset_lookup_priority=SYMBOL`)
+        const abortController = new AbortController();
+        fetch(`https://data-api.coindesk.com/asset/v2/metadata?assets=${coinId}&quote_asset=USD&asset_language=en-US&asset_lookup_priority=SYMBOL`, {signal: abortController.signal})
             .then(response => response.json())
             .then(result => {
                 setCoin(result.Data[coinId]);
             })
-            .catch((err) => alert(err.message));
-    }, []);
+            .catch((err) => {
+                throw(err.message);
+            })
+
+            return () => abortController.abort();
+
+    }, [coinId]);
 
 
 
@@ -107,7 +113,9 @@ export default function CoinDetails() {
 
                 </div>
             </div>
-            <LatestNews count={3} name={coin.NAME} symbol={coinId} />
+            {coin.NAME && coin.SYMBOL && (
+                <LatestNews count={3} name={coin.NAME} symbol={coin.SYMBOL} />
+            )}
         </>
     );
 }

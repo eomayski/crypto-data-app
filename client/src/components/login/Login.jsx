@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useForm from "../../hooks/useForm";
 import { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
@@ -42,9 +42,9 @@ export default function Login() {
                         </h2>
                         <p className="mt-2 text-center text-sm text-gray-400">
                             Don't have an account?{' '}
-                            <a href="/register" className="font-medium text-indigo-400 hover:text-indigo-300">
+                            <Link to="/register" className="font-medium text-indigo-400 hover:text-indigo-300">
                                 Register here
-                            </a>
+                            </Link>
                         </p>
                     </div>
 

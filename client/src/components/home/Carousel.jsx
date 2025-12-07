@@ -10,12 +10,20 @@ export default function Carousel() {
     const [topCoins, setTopCoins] = useState([])
 
     useEffect(() => {
-        fetch('https://data-api.coindesk.com/asset/v1/top/list?page=1&page_size=10&sort_by=CIRCULATING_MKT_CAP_USD&sort_direction=DESC&groups=ID,BASIC,PRICE,MKT_CAP,CHANGE&toplist_quote_asset=USD')
+        const abortController = new AbortController();
+        fetch('https://data-api.coindesk.com/asset/v1/top/list?page=1&page_size=10&sort_by=CIRCULATING_MKT_CAP_USD&sort_direction=DESC&groups=ID,BASIC,PRICE,MKT_CAP,CHANGE&toplist_quote_asset=USD', {signal: abortController.signal})
             .then(response => response.json())
             .then(result => {
                 setTopCoins(result.Data.LIST);
             })
-            .catch((err) => alert(err.message));
+            .catch((err) => {
+                throw(`Loading carousel error: ${err.message}`);
+            }
+);
+
+
+            return () => abortController.abort();
+
     }, []);
 
 
