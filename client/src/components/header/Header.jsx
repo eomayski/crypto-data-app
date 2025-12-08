@@ -42,15 +42,6 @@ export default function Header() {
                                 Traders
                             </NavLink   >
 
-
-                            {/* {isAuthenticated &&
-                                <Link
-                                    to="/portfolio"
-                                    className="text-white hover:text-indigo-300 transition duration-150 ease-in-out text-sm font-medium p-2 rounded-md"
-                                >
-                                    Portfolio
-                                </Link>
-                            } */}
                         </nav>
 
                         <div className="flex space-x-4 ml-6">

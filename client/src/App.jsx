@@ -12,6 +12,7 @@ import Login from "./components/login/Login.jsx";
 import Logout from "./components/logout/Logout.jsx";
 import Guests from "./components/guards/Guests.jsx";
 import Users from "./components/guards/Users.jsx";
+import AddCoin from "./components/coin/AddCoin.jsx";
 
 export default function App() {
     const { user } = useUserContext();
@@ -31,6 +32,7 @@ export default function App() {
                     </Route>
                         <Route path="/logout" element={<Logout />} />
                     <Route element={<Users user={user}/>}>
+                        <Route path="/add/:coinId" element={<AddCoin />} />
                     </Route>
 
                 </Routes>

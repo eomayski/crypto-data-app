@@ -1,11 +1,15 @@
 import { Globe } from 'lucide-react';
 import LatestNews from '../news/LatestNews.jsx';
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
+import { useUserContext } from '../../contexts/UserContext.jsx';
+
 
 export default function CoinDetails() {
     const { coinId } = useParams()
     const [coin, setCoin] = useState({})
+    const { isAuthenticated } = useUserContext();
+    
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -110,9 +114,19 @@ export default function CoinDetails() {
                             </p>
                         </div>
                     </div>
-
                 </div>
             </div>
+            {isAuthenticated && coin.NAME && coin.SYMBOL && (
+                <div className='flex justify-center'>
+
+                <Link 
+                    to={`/add/${coin.SYMBOL}`}
+                    className="max-w-1/4 flex justify-center items-center py-3 px-4 mb-12 border border-transparent text-lg font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 shadow-lg"
+                    >
+                    Add {coin.NAME}
+                </Link>
+                </div>
+            )}
             {coin.NAME && coin.SYMBOL && (
                 <LatestNews count={3} name={coin.NAME} symbol={coin.SYMBOL} />
             )}
