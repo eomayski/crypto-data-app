@@ -56,7 +56,7 @@ export default function CoinDetails() {
                             <img
                                 src={coin.LOGO_URL}
                                 alt={coin.NAME}
-                                className="w-24 h-24 bg-gray-700 object-cover object-center rounded-full mb-4 shadow-lg"
+                                className="w-24 h-24 bg-gray-700 p2 object-cover object-center rounded-full mb-4 shadow-lg"
                             />
                             <h1 className="text-3xl font-extrabold text-white">
                                 {coin.NAME}

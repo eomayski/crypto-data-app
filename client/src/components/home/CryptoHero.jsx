@@ -136,12 +136,12 @@ export default function CryptoHero() {
                             </div>
                         </div>
                     </div>
-
+                                
                     {/* Visual Element */}
                     <div className="mt-12 lg:col-span-6 lg:mt-0 flex justify-center items-center">
                         <div className="w-full flex items-center justify-center p-6">
                             <span className="text-indigo-200 text-xl font-semibold">
-                                <img src="https://www.i-s-p.co.uk/wp-content/uploads/2022/10/Globe-v5.gif" className="h-120 min-w-120" alt="crypto" />
+                                <img src="/images/Globe.gif" className="h-120 min-w-120" alt="crypto" />
                             </span>
                         </div>
                     </div>
