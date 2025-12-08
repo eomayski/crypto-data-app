@@ -13,6 +13,8 @@ import Logout from "./components/logout/Logout.jsx";
 import Guests from "./components/guards/Guests.jsx";
 import Users from "./components/guards/Users.jsx";
 import AddCoin from "./components/coin/AddCoin.jsx";
+import Portfolio from "./components/portfolio/Portfolio.jsx";
+import Favorites from "./components/favorites/Favorites.jsx";
 
 export default function App() {
     const { user } = useUserContext();
@@ -26,12 +28,16 @@ export default function App() {
                     <Route path="/latest-news" element={<LatestNews count={12} />} />
                     <Route path="/news/:newsId" element={<NewsDetails />} />
                     <Route path="/crypto/:coinId" element={<CoinDetails />} />
+                    <Route path="/logout" element={<Logout />} />
+
                     <Route element={<Guests user={user}/>}>
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
                     </Route>
-                        <Route path="/logout" element={<Logout />} />
+
                     <Route element={<Users user={user}/>}>
+                        <Route path="/portfolio/:userId" element={<Portfolio />} />
+                        <Route path="/favorites/:userId" element={<Favorites />} />
                         <Route path="/add/:coinId" element={<AddCoin />} />
                     </Route>
 

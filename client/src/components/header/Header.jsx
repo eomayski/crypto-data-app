@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router';
-import { CircleUserRound, Menu, X } from 'lucide-react';
+import { CircleUserRound, HeartIcon, Menu, X } from 'lucide-react';
 import { useUserContext } from '../../contexts/UserContext.jsx';
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
-    const { isAuthenticated } = useUserContext();
+    const { user, isAuthenticated } = useUserContext();
 
     return (
         <header className="sticky top-0 z-40 mr-6 ml-6 rounded-b-lg backdrop-filter backdrop-blur-lg shadow-lg bg-[#9b87f533] transition duration-300 ease-in-out">
@@ -54,9 +54,18 @@ export default function Header() {
                                         >
                                             Logout
                                         </Link>
+
                                         <NavLink
                                             style={({isActive}) => isActive ? {color: '#7c86ff'} : {} }
-                                            to="/portfolio"
+                                            to={`/favorites/${user['_id']}`}
+                                            className="text-white hover:text-indigo-300 transition duration-150 ease-in-out text-sm font-medium rounded-md"
+                                        >
+                                            <HeartIcon />
+                                        </NavLink>
+
+                                        <NavLink
+                                            style={({isActive}) => isActive ? {color: '#7c86ff'} : {} }
+                                            to={`/portfolio/${user['_id']}`}
                                             className="text-white hover:text-indigo-300 transition duration-150 ease-in-out text-sm font-medium rounded-md"
                                         >
                                             <CircleUserRound />
