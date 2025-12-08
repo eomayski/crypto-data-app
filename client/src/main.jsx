@@ -3,14 +3,14 @@ import { BrowserRouter } from 'react-router'
 import './index.css'
 import App from './App.jsx'
 import { UserProvider } from './contexts/UserContext.jsx';
-import { StrictMode } from 'react';
+// import { StrictMode } from 'react';
 
 createRoot(document.getElementById('root')).render(
-    <StrictMode>
+    // <StrictMode>
         <BrowserRouter>
             <UserProvider>
                 <App />
             </UserProvider>
         </BrowserRouter>
-    </StrictMode>
+    // </StrictMode>
 )

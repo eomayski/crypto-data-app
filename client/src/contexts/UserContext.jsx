@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import useRequest from "../hooks/useRequest";
 import usePersistedState from "../hooks/usePersistedState";
 
@@ -19,29 +19,34 @@ const UserContext = createContext({
 export function UserProvider({
     children,
 }) {
-    const [user, setUser] = usePersistedState(null);
+    const [user, setUser] = usePersistedState(null, 'user');
     const { request } = useRequest();
 
-    const registerHandler = async (email, password) => {
+    const registerHandler = async (email, password, username, avatarUrl) => {
         const newUser = { email, password };
 
         // Register API call 
-        const result = await request('/users/register', 'POST', newUser);
+        const result = await request('/users/register', 'POST', newUser,);
 
         // Login user after register
-        setUser(auth, result);
+        await setUser(result);
+
+        const newTrader = {username, avatarUrl}
+        
+        const trader = await request('/data/traders', 'POST', newTrader, { accessToken: result.accessToken })
+        
+        console.log(trader);
+
     };
 
     const loginHandler = async (email, password) => {
         const result = await request('/users/login', 'POST', { email, password });
 
-        console.log(result);
-
         setUser(result);
     };
 
-    const logoutHandler = () => {
-        return request('/users/logout', 'GET', null, { accessToken: user.accessToken })
+    const logoutHandler = async () => {
+        return await request('/users/logout', 'GET', null, { accessToken: user.accessToken })
             .finally(() => setUser(null));
     };
 

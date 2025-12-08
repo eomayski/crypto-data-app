@@ -1,6 +1,46 @@
-import { Link } from "react-router";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router";
+import UserContext from "../../contexts/UserContext.jsx";
+import useForm from "../../hooks/useForm.js";
 
 export default function Register() {
+
+
+const navigate = useNavigate();
+    const { registerHandler } = useContext(UserContext)
+
+    const registerSubmitHandler = async (values) => {
+        const { email, password, confirmPassword, username, avatarUrl } = values;
+
+        if (!email || !password) {
+            return alert('Email and password are required!');
+        }
+
+        if (password !== confirmPassword) {
+            return alert('Password mismatch!');
+        }
+
+        try {
+            registerHandler(email, password, username, avatarUrl);
+
+            navigate('/');
+        } catch (err) {
+            alert(err.message);
+        }
+    }
+
+    const {
+        register,
+        formAction,
+    } = useForm(registerSubmitHandler, {
+        email: '',
+        password: '',
+        confirmPassword: '',
+        username: '',
+        avatarUrl: ''
+    });
+
+
     return (
         <div className="flex flex-grow items-center justify-center px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8 bg-gray-800 p-10 rounded-xl shadow-2xl border border-indigo-500/30">
@@ -16,7 +56,7 @@ export default function Register() {
                     </p>
                 </div>
 
-                <form className="mt-8 space-y-6">
+                <form className="mt-8 space-y-6" action={formAction}>
 
                     <div className="rounded-md shadow-sm -space-y-px">
 
@@ -25,7 +65,7 @@ export default function Register() {
                             <label htmlFor="email-register" className="sr-only">Email address</label>
                             <input
                                 id="email-register"
-                                name="email"
+                                {...register('email')}
                                 type="email"
                                 autoComplete="email"
                                 required
@@ -39,7 +79,7 @@ export default function Register() {
                             <label htmlFor="password-register" className="sr-only">Password</label>
                             <input
                                 id="password-register"
-                                name="password"
+                                {...register('password')}
                                 type="password"
                                 autoComplete="new-password"
                                 required
@@ -53,7 +93,7 @@ export default function Register() {
                             <label htmlFor="confirm-password-register" className="sr-only">Confirm Password</label>
                             <input
                                 id="confirm-password-register"
-                                name="confirm-password"
+                                {...register('confirmPassword')}
                                 type="password"
                                 autoComplete="new-password"
                                 required
@@ -67,7 +107,7 @@ export default function Register() {
                             <label htmlFor="username-register" className="sr-only">Username</label>
                             <input
                                 id="username-register"
-                                name="username"
+                                {...register('username')}
                                 className="appearance-none relative block w-full px-3 py-3 border border-gray-600 placeholder-gray-500 text-white bg-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-none"
                                 placeholder="Username"
                             />
@@ -78,8 +118,7 @@ export default function Register() {
                             <label htmlFor="avatar-register" className="sr-only">Avatar</label>
                             <input
                                 id="avatar-register"
-                                name="avatarUrl"
-                                type="email"
+                                {...register('avatarUrl')}
                                 className="appearance-none relative block w-full px-3 py-3 border border-gray-600 placeholder-gray-500 text-white bg-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-b-md"
                                 placeholder="Avatar URL"
                             />

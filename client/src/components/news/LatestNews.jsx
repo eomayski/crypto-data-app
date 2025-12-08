@@ -34,9 +34,7 @@ export default function LatestNews({count, name, symbol}) {
 
             return () => abortController.abort();
 
-    }, [URL, symbol, count]);
-    console.log(latestNews);
-    
+    }, [URL, symbol, count]);    
 
     return (
         <section id="latest-news" className="py-16 bg-gray-900 text-white">
