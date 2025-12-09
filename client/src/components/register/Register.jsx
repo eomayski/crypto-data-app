@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router";
 import UserContext from "../../contexts/UserContext.jsx";
 import useForm from "../../hooks/useForm.js";
+import generateRandom from "../../utils/generateRandom.js";
 
 export default function Register() {
 
@@ -10,7 +11,7 @@ const navigate = useNavigate();
     const { registerHandler } = useContext(UserContext)
 
     const registerSubmitHandler = async (values) => {
-        const { email, password, confirmPassword, username, avatarUrl } = values;
+        let { email, password, confirmPassword, username, avatarUrl } = values;
 
         if (!email || !password) {
             return alert('Email and password are required!');
@@ -18,6 +19,14 @@ const navigate = useNavigate();
 
         if (password !== confirmPassword) {
             return alert('Password mismatch!');
+        }
+
+        if (!username) {
+            username = `User-${generateRandom()}`
+        }
+
+        if (!avatarUrl) {
+            avatarUrl = 'https://e7.pngegg.com/pngimages/348/800/png-clipart-man-wearing-blue-shirt-illustration-computer-icons-avatar-user-login-avatar-blue-child.png'
         }
 
         try {
