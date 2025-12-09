@@ -9,11 +9,9 @@ export default function Portfolio() {
     const { userId } = useParams();
     const [traders, setTraders] = useState([]);
     const [positions, setPositions] = useState([])
-    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const abortController = new AbortController();
-        setIsLoading(true)
         fetch(`http://localhost:3030/data/traders`, { signal: abortController.signal })
             .then(response => response.json())
             .then(result => {
@@ -28,7 +26,6 @@ export default function Portfolio() {
             .then(response => response.json())
             .then(result => {
                 setPositions(result);
-                setIsLoading(false)
             })
             .catch((err) => {
                 console.log(err.message);
@@ -42,14 +39,12 @@ export default function Portfolio() {
     }, []);
 
 
-    console.log(traders);
     
 
     const trader = traders.find(t => t['_ownerId'] === userId);
 
     const traderPositions = positions.filter(p => p['_ownerId'] === userId)
 
-    console.log(traderPositions);
     
 
     if (!trader) {
