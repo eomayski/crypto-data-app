@@ -35,7 +35,7 @@ export default function Traders() {
     }
 
     return (
-        <section className="py-16 bg-gray-900 text-white">
+        <section className="flex-grow py-16 bg-gray-900 text-white">
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
                 <h2 className="text-3xl font-extrabold text-white text-center mb-10">
                     Top Community Traders
