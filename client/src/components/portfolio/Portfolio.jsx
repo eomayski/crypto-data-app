@@ -37,7 +37,7 @@ export default function Portfolio() {
         return () => abortController.abort();
 
 
-    }, [refresh]);
+    }, [refresh, userId]);
 
 
     
