@@ -3,6 +3,8 @@ import LatestNews from '../news/LatestNews.jsx';
 import { Link, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { useUserContext } from '../../contexts/UserContext.jsx';
+import formatCurrency from '../../utils/formatCurrency.js';
+import formatPercentage from '../../utils/formatPercentage.jsx';
 
 
 export default function CoinDetails() {
@@ -25,21 +27,6 @@ export default function CoinDetails() {
             return () => abortController.abort();
 
     }, [coinId]);
-
-
-
-    const formatCurrency = (amount) => {
-        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 4 }).format(amount);
-    };
-
-    const formatPercentage = (percent) => {
-        const colorClass = percent >= 0 ? 'text-green-400' : 'text-red-500';
-        return (
-            <span className={colorClass}>
-                {percent > 0 ? '▲' : '▼'} {percent ? (percent)?.toFixed(2) : 'Loading...'}%
-            </span>
-        );
-    };
 
     const priceChangeStatus = coin.SPOT_MOVING_24_HOUR_CHANGE_USD >= 0;
     const priceChangeColor = priceChangeStatus ? 'text-green-400' : 'text-red-500';

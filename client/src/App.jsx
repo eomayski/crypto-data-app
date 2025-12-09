@@ -28,6 +28,7 @@ export default function App() {
                     <Route path="/latest-news" element={<LatestNews count={12} />} />
                     <Route path="/news/:newsId" element={<NewsDetails />} />
                     <Route path="/crypto/:coinId" element={<CoinDetails />} />
+                    <Route path="/portfolio/:userId" element={<Portfolio />} />
                     <Route path="/logout" element={<Logout />} />
 
                     <Route element={<Guests user={user}/>}>
@@ -36,7 +37,6 @@ export default function App() {
                     </Route>
 
                     <Route element={<Users user={user}/>}>
-                        <Route path="/portfolio/:userId" element={<Portfolio />} />
                         <Route path="/favorites/:userId" element={<Favorites />} />
                         <Route path="/add/:coinId" element={<AddCoin />} />
                     </Route>

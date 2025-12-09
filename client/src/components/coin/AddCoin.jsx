@@ -35,6 +35,9 @@ export default function AddCoin() {
 
         data.quantity=Number(data.quantity)
         data.price=Number(data.price)
+        data.logo = coin.LOGO_URL
+        data.name = coin.NAME
+        data.symbol = coin.SYMBOL
 
         try {
             await request('/data/positions', 'POST', data);
