@@ -1,0 +1,73 @@
+"traders": [
+    {
+        "_ownerId": "bc21cd8b-ed81-4f15-9cbf-4b5062e14109",
+        "username": "eomayski",
+        "avatarUrl": "https://media-assets.wired.it/photos/615d9c4c52163f7b20f02a20/master/w_1600%2Cc_limit/ready-player-one-1200-1200-675-675-crop-000000.jpg",
+        "_createdOn": 1765223805482,
+        "_id": "6360aeee-d5e7-4a66-bfb1-faefc1096f9c"
+    },
+    {
+        "_ownerId": "91cf8b4a-a7ba-4349-b5f7-37d8ae950e51",
+        "username": "Pesho",
+        "avatarUrl": "https://e7.pngegg.com/pngimages/348/800/png-clipart-man-wearing-blue-shirt-illustration-computer-icons-avatar-user-login-avatar-blue-child.png",
+        "_createdOn": 1765256734230,
+        "_id": "7a11764b-2c87-4078-b84a-5b188eb1294b"
+    }
+]
+
+"positions": [
+    {
+        "_ownerId": "bc21cd8b-ed81-4f15-9cbf-4b5062e14109",
+        "quantity": 1.5,
+        "price": 550,
+        "date": "2022-06-12",
+        "exchange": "Binance",
+        "note": "Very profitable buy.",
+        "logo": "https://resources.cryptocompare.com/asset-management/8/1661250459982.png",
+        "name": "Binance Coin",
+        "symbol": "BNB",
+        "_createdOn": 1765236597417,
+        "_id": "29f1059e-b829-4e4f-b6e1-f468086ffc7e"
+    },
+    {
+        "_ownerId": "bc21cd8b-ed81-4f15-9cbf-4b5062e14109",
+        "quantity": 250,
+        "price": 600,
+        "date": "2024-07-29",
+        "exchange": "BYBIT",
+        "note": "I missed a big profit on this one.",
+        "logo": "https://resources.cryptocompare.com/asset-management/2797/1746021985865.png",
+        "name": "Sui",
+        "symbol": "SUI",
+        "_createdOn": 1765238231308,
+        "_id": "baaddc40-d0e4-4095-8f4e-96a537ece3aa"
+    },
+    {
+	"_ownerId": "bc21cd8b-ed81-4f15-9cbf-4b5062e14109",
+	"quantity": 1200,
+	"price": 0.33,
+	"date": "2020-09-07",
+	"exchange": "Binance",
+	"note": "I am holding this position over five years.",
+	"logo": "https://resources.cryptocompare.com/asset-management/12/1722244193379.png",
+	"name": "Cardano",
+	"symbol": "ADA",
+	"_createdOn": 1765246477016,
+	"_id": "aafa163a-09fc-42fe-80ab-3666e75b9867"
+    }
+]
+
+"users": [
+	{
+	    "email": "pesho@abv.bg",
+	    "password": "123",
+	    "_createdOn": 1765256734204,
+	    "_id": "91cf8b4a-a7ba-4349-b5f7-37d8ae950e51"
+	},
+	{
+	    "email": "emil@abv.bg",
+	    "password": "123",
+	    "_createdOn": 1765223805376,
+	    "_id": "bc21cd8b-ed81-4f15-9cbf-4b5062e14109"
+}
+]

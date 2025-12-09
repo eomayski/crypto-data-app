@@ -1,9 +1,10 @@
-import React, { useState } from 'react'; // <-- Добавен useState
+import { useState } from 'react'; // <-- Добавен useState
 import { Eye, Edit, Plus, X } from 'lucide-react';
 import formatCurrency from "../../utils/formatCurrency.js";
 import useRequest from '../../hooks/useRequest.js';
 import { useUserContext } from '../../contexts/UserContext.jsx';
-// import formatPercentage from "../../utils/formatPercentage.jsx";
+import { Link } from 'react-router';
+
 
 export default function Position({ asset, userId, }) {
     const {user} = useUserContext();
@@ -76,9 +77,9 @@ export default function Position({ asset, userId, }) {
                 <div className="flex space-x-2">
                     {/* Details Button - закачаме toggleDetailsHandler */}
                     <button
-                        className={`p-2 rounded-md ${showDetails ? 'bg-indigo-700' : 'bg-indigo-600 hover:bg-indigo-700'} text-white transition duration-150`}
+                        className={`p-2 rounded-md ${showDetails ? 'bg-indigo-700' : 'bg-gray-700 hover:hover:bg-gray-600'} text-white transition duration-150`}
                         title={showDetails ? "Hide Details" : "Show Details"}
-                        onClick={toggleDetailsHandler} // <-- Хендлър
+                        onClick={toggleDetailsHandler}
                     >
                         <Eye className="w-5 h-5" />
                     </button>
@@ -90,12 +91,14 @@ export default function Position({ asset, userId, }) {
                         >
                         <Edit className="w-5 h-5" />
                     </button>
+                    <Link to={`/add/${asset.symbol}`}>
                     <button
                         className="p-2 rounded-md bg-green-600 hover:bg-green-400 text-white transition duration-150"
                         title="Add More"
                         >
                         <Plus className="w-5 h-5" />
                     </button>
+                    </Link>
                     <button
                         className="p-2 rounded-md bg-red-600 hover:bg-red-500 text-white transition duration-150"
                         title="Close Position"
@@ -113,7 +116,7 @@ export default function Position({ asset, userId, }) {
                     <h4 className="text-lg font-semibold text-white mb-3">Transaction Details</h4>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                         
-                        {/* Buy Price (Показва се отново за малки екрани, където беше скрит) */}
+                        {/* Buy Price */}
                         <div className="text-sm md:hidden">
                             <p className="text-gray-400">Buy Price</p>
                             <p className="font-medium text-white">{formatCurrency(asset.price)}</p>
