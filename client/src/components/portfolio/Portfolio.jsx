@@ -130,6 +130,15 @@ export default function Portfolio() {
                     Open Trades:
                 </h2>
 
+                {positions.length === 0 && (
+
+                    <div>
+                        <h2 className="text-sm font-medium text-gray-400">
+                            No open trades yet!
+                        </h2>
+                    </div>
+                ) }
+
                 <div className="space-y-6">
                     {positions.map((position) => <Position key={position['_id']} asset={position} userId={userId} refresh={forceRefresh}/>)}
                 </div>
