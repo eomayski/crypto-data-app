@@ -9,6 +9,7 @@ export default function Portfolio() {
     const { userId } = useParams();
     const [traders, setTraders] = useState([]);
     const [positions, setPositions] = useState([])
+    const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -36,7 +37,7 @@ export default function Portfolio() {
         return () => abortController.abort();
 
 
-    }, []);
+    }, [refresh]);
 
 
     
@@ -60,6 +61,10 @@ export default function Portfolio() {
             day: '2-digit'
         }).format(new Date(trader['_createdOn']))
         : 'Loading...';
+
+        function forceRefresh() {
+            setRefresh(state => !state)
+        }
 
     return (
         <div className="flex flex-grow bg-gray-900 text-white py-12">
@@ -128,7 +133,7 @@ export default function Portfolio() {
                 </h2>
 
                 <div className="space-y-6">
-                    {traderPositions.map((position) => <Position key={position['_id']} asset={position} userId={userId}/>)}
+                    {traderPositions.map((position) => <Position key={position['_id']} asset={position} userId={userId} refresh={forceRefresh}/>)}
                 </div>
 
             </div>

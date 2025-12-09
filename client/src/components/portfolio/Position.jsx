@@ -6,7 +6,7 @@ import { useUserContext } from '../../contexts/UserContext.jsx';
 import { Link } from 'react-router';
 
 
-export default function Position({ asset, userId, }) {
+export default function Position({ asset, userId, refresh}) {
     const {user} = useUserContext();
     const { request } = useRequest();
     
@@ -37,6 +37,8 @@ export default function Position({ asset, userId, }) {
         } catch (err) {
             alert('Unable to delete position: ' + err.message);
         }
+
+        refresh();
     };
     
     // Помощна функция за форматиране на датата
