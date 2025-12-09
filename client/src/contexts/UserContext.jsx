@@ -35,8 +35,6 @@ export function UserProvider({
         
         const trader = await request('/data/traders', 'POST', newTrader, { accessToken: result.accessToken })
         
-        console.log(trader);
-
     };
 
     const loginHandler = async (email, password) => {

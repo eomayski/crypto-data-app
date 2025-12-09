@@ -23,7 +23,7 @@ export default function Portfolio() {
             })
 
         
-            fetch(`http://localhost:3030/data/positions`, { signal: abortController.signal })
+            fetch(`http://localhost:3030/data/positions?where=_ownerId%3D%22${userId}%22`, { signal: abortController.signal })
             .then(response => response.json())
             .then(result => {
                 setPositions(result);
@@ -43,8 +43,6 @@ export default function Portfolio() {
     
 
     const trader = traders.find(t => t['_ownerId'] === userId);
-
-    const traderPositions = positions.filter(p => p['_ownerId'] === userId)
 
     
 
@@ -133,7 +131,7 @@ export default function Portfolio() {
                 </h2>
 
                 <div className="space-y-6">
-                    {traderPositions.map((position) => <Position key={position['_id']} asset={position} userId={userId} refresh={forceRefresh}/>)}
+                    {positions.map((position) => <Position key={position['_id']} asset={position} userId={userId} refresh={forceRefresh}/>)}
                 </div>
 
             </div>

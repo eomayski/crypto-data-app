@@ -15,6 +15,7 @@ import Users from "./components/guards/Users.jsx";
 import AddCoin from "./components/coin/AddCoin.jsx";
 import Portfolio from "./components/portfolio/Portfolio.jsx";
 import Favorites from "./components/favorites/Favorites.jsx";
+import Traders from "./components/traders/Traders.jsx";
 
 export default function App() {
     const { user } = useUserContext();
@@ -26,6 +27,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/latest-news" element={<LatestNews count={12} />} />
+                    <Route path="/traders" element={<Traders />} />
                     <Route path="/news/:newsId" element={<NewsDetails />} />
                     <Route path="/crypto/:coinId" element={<CoinDetails />} />
                     <Route path="/portfolio/:userId" element={<Portfolio />} />
