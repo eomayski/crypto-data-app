@@ -2,6 +2,7 @@ import { Navigate, useParams } from "react-router";
 import { useUserContext } from "../../contexts/UserContext.jsx";
 import { useEffect, useState } from "react";
 import FavoriteCard from "./FavoriteCard.jsx";
+import useRequest from "../../hooks/useRequest.js";
 
 export default function Favorites() {
     const { userId } = useParams();
@@ -24,6 +25,7 @@ export default function Favorites() {
             })
             .catch((err) => {
                 console.error(err.message);
+                setFollowedTraders([])
             })
 
 
@@ -37,22 +39,25 @@ export default function Favorites() {
         setRefresh(state => !state);
     }
 
-    
+
     return (
         <section className="flex-grow py-16 bg-gray-900 text-white">
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
                 <h2 className="text-3xl font-extrabold text-white text-center mb-10">
                     Favorites
                 </h2>
-                <div className="space-y-6">
-                    {followedTraders.map((trader) => (
-                        <FavoriteCard
-                            key={trader['_id']}
-                            trader={trader}
-                            refresh={forceRefresh}
-                        />
-                    ))}
-                </div>
+                {followedTraders.length !== 0 ? (
+                    <div className="space-y-6">
+                        {followedTraders.map((trader) => (
+                            <FavoriteCard
+                                key={trader['_id']}
+                                trader={trader}
+                                refresh={forceRefresh}
+                            />
+                        ))}
+                    </div>) :
+                    (<h2 className="text-3xl font-extrabold text-white text-center mb-10">No Added Favorites yet!</h2>)
+                }
             </div>
         </section>
     );

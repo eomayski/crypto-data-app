@@ -11,7 +11,6 @@ export default function FavoriteCard({ trader, refresh }) {
     const { request } = useRequest();
     const { user } = useUserContext();
     
-    const currentTraderId = trader['_ownerId']
     
     const unfollowHandler = async () => {
         if (loading) return;

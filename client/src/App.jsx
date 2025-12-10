@@ -17,9 +17,12 @@ import Portfolio from "./components/portfolio/Portfolio.jsx";
 import Favorites from "./components/favorites/Favorites.jsx";
 import Traders from "./components/traders/Traders.jsx";
 import EditPosition from "./components/portfolio/EditPosition.jsx";
+import { useEffect } from "react";
+import useRequest from "./hooks/useRequest.js";
 
 export default function App() {
     const { user } = useUserContext();
+    
 
     return (
         <>

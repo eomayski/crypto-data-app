@@ -86,21 +86,21 @@ export default function Portfolio() {
                             <div className="mt-2 text-sm text-gray-400 space-y-1">
                                 <p className="flex items-center justify-center md:justify-start">
                                     <User className="w-4 h-4 mr-2 text-indigo-400" />
-                                    <span className="font-medium text-white mr-1">Status:</span> Active Trader
+                                    <span className="font-medium text-white mr-1">Status:</span> {positions.length === 0 ? 'Spectator' : `Active Trader`}
                                 </p>
                                 <p className="flex items-center justify-center md:justify-start">
                                     <Calendar className="w-4 h-4 mr-2 text-indigo-400" />
                                     <span className="font-medium text-white mr-1">Registered:</span> {dateFormatted}
                                 </p>
-                                <p className="flex items-center justify-center md:justify-start">
+                                {/* <p className="flex items-center justify-center md:justify-start">
                                     <Users className="w-4 h-4 mr-2 text-indigo-400" />
                                     <span className="font-medium text-white mr-1">Followers:</span> many
-                                </p>
+                                </p> */}
                             </div>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                    {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
 
                         <div className="p-4 bg-gray-700 rounded-lg shadow-inner">
                             <p className="text-sm font-medium text-gray-400">Total Asset Value (USD)</p>
@@ -122,7 +122,7 @@ export default function Portfolio() {
                                 {formatPercentage(9.75)}
                             </p>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 
