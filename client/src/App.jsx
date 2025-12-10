@@ -16,6 +16,7 @@ import AddCoin from "./components/coin/AddCoin.jsx";
 import Portfolio from "./components/portfolio/Portfolio.jsx";
 import Favorites from "./components/favorites/Favorites.jsx";
 import Traders from "./components/traders/Traders.jsx";
+import EditPosition from "./components/portfolio/EditPosition.jsx";
 
 export default function App() {
     const { user } = useUserContext();
@@ -41,6 +42,7 @@ export default function App() {
                     <Route element={<Users user={user}/>}>
                         <Route path="/favorites/:userId" element={<Favorites />} />
                         <Route path="/add/:coinId" element={<AddCoin />} />
+                        <Route path="/edit/:coinId" element={<EditPosition />} />
                     </Route>
 
                 </Routes>

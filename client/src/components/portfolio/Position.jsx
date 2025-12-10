@@ -87,12 +87,14 @@ export default function Position({ asset, userId, refresh}) {
                     </button>
 
                     {isOwner && (<>
+                    <Link to={`/edit/${asset['_id']}`} >
                     <button
                         className="p-2 rounded-md bg-gray-700 hover:bg-gray-600 text-white transition duration-150"
                         title="Edit Position"
                         >
                         <Edit className="w-5 h-5" />
                     </button>
+                    </Link>
                     <Link to={`/add/${asset.symbol}`}>
                     <button
                         className="p-2 rounded-md bg-green-600 hover:bg-green-400 text-white transition duration-150"
