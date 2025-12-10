@@ -1,7 +1,8 @@
-import { Navigate, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useUserContext } from "../../contexts/UserContext.jsx";
 import { useEffect, useState } from "react";
 import FavoriteCard from "./FavoriteCard.jsx";
+import styles from "./Favorites.module.css"
 
 export default function Favorites() {
     const navigate = useNavigate();
@@ -55,7 +56,7 @@ export default function Favorites() {
                             />
                         ))}
                     </div>) :
-                    (<h2 className="text-3xl font-extrabold text-white text-center mb-10">No Added Favorites yet!</h2>)
+                    (<h2 className="text-5xl font-extrabold text-white text-center">No <span className={styles['accent-text']}>Favorites</span> Found</h2>)
                 }
             </div>
         </section>

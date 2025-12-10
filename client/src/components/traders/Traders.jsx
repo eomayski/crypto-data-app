@@ -66,7 +66,7 @@ export default function Traders() {
     }
 
     if (!traders || traders.length === 0) {
-        return <div className="text-white text-center py-12">No traders found</div>;
+        return <div className="text-5xl font-extrabold text-white text-center">No traders found</div>;
     }
 
     function forceRefresh() {
@@ -77,7 +77,7 @@ export default function Traders() {
         <section className="flex-grow py-16 bg-gray-900 text-white">
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
                 <h2 className="text-3xl font-extrabold text-white text-center mb-10">
-                    Top Community Traders
+                    Top <span>Traders</span>
                 </h2>
                 <div className="space-y-6">
                     {traders.map((trader) => (

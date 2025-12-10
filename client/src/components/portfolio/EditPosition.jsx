@@ -2,6 +2,7 @@ import { Calendar, CoinsIcon, DollarSign, FileText, Hash } from "lucide-react";
 import { useNavigate, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import useRequest from "../../hooks/useRequest.js";
+import styles from './EditPosition.module.css'
 import useForm from "../../hooks/useForm.js";
 import { useUserContext } from "../../contexts/UserContext.jsx";
 
@@ -79,10 +80,10 @@ export default function EditPosition() {
                         className="w-24 h-24 bg-gray-700 p-2 object-cover object-center rounded-full mb-4 shadow-lg"
                     />
                     <h2 className="text-center text-3xl font-extrabold text-white">
-                        Edit {coin.name} position
+                        Edit <span className={styles['accent-text']} >{coin.name}</span> position
                     </h2>
                     <p className="mt-2 text-center text-sm text-gray-400">
-                        Edit transaction info for {coin.symbol}.
+                        Edit transaction info for <span className={styles['accent-text']} >{coin.symbol}</span>.
                     </p>
                 </div>
 
