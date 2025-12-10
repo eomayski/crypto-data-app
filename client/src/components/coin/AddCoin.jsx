@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import useRequest from "../../hooks/useRequest.js";
 import useForm from "../../hooks/useForm.js";
 import { useUserContext } from "../../contexts/UserContext.jsx";
+import styles from "./AddCoin.module.css"
 
 export default function AddCoin() {
     const { coinId } = useParams()
@@ -71,10 +72,10 @@ export default function AddCoin() {
                         className="w-24 h-24 bg-gray-700 p-2 object-cover object-center rounded-full mb-4 shadow-lg"
                     />
                     <h2 className="text-center text-3xl font-extrabold text-white">
-                        Add {coin.NAME} to your portfolio
+                        Add <span className={styles['accent-text']}>{coin.NAME}</span> to your portfolio
                     </h2>
                     <p className="mt-2 text-center text-sm text-gray-400">
-                        Log a new transaction for {coin.SYMBOL}.
+                        Log a new transaction for <span className={styles['accent-text']}>{coin.SYMBOL}</span>.
                     </p>
                 </div>
 
