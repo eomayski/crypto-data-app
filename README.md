@@ -53,6 +53,8 @@ A comprehensive cryptocurrency tracking and portfolio management application wit
 - Dark theme optimized for extended trading sessions
 - Real-time UI updates with Vite hot module replacement
 
+![image](https://github.com/user-attachments/assets/d43733ee-8a15-41f6-b86e-f16d3fdd10df)
+
 ### 🚀 Performance
 - Fast development server with Vite
 - Optimized component rendering with React hooks
@@ -76,7 +78,7 @@ crypto-data-app/
 ├── client/
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── coin/          # Coin management (add, edit, details)
+│   │   │   ├── coin/          # Coin management (add, details)
 │   │   │   ├── favorites/     # Favorite traders
 │   │   │   ├── footer/        # Footer component
 │   │   │   ├── guards/        # Route guards (Users, Guests)
@@ -85,7 +87,7 @@ crypto-data-app/
 │   │   │   ├── login/         # Login page
 │   │   │   ├── logout/        # Logout handler
 │   │   │   ├── news/          # News articles
-│   │   │   ├── portfolio/     # Portfolio management
+│   │   │   ├── portfolio/     # Portfolio management (Details, Positions, Close/Add Positions)
 │   │   │   ├── register/      # Registration page
 │   │   │   └── traders/       # Trader cards & profiles
 │   │   ├── contexts/          # React Context (UserContext)
@@ -103,8 +105,7 @@ crypto-data-app/
 │       ├── collections.json   # Available collections
 │       ├── traders.json       # Trader profiles
 │       ├── positions.json     # Trading positions
-│       ├── followed.json      # Follow relationships
-│       └── [other collections]
+│       └── followed.json      # Follow relationships
 └── README.md
 ```
 
@@ -161,6 +162,10 @@ Client runs on `http://localhost:5173`
 - `GET /data/followed` - Get user's following list
 - `POST /data/followed` - Follow a trader
 - `DELETE /data/followed/:id` - Unfollow a trader
+
+### External
+CoinDesk’s REST API
+For Crypto News and Metadata
 
 ## 🤝 Contributing
 

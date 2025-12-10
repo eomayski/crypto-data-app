@@ -17,8 +17,7 @@ import Portfolio from "./components/portfolio/Portfolio.jsx";
 import Favorites from "./components/favorites/Favorites.jsx";
 import Traders from "./components/traders/Traders.jsx";
 import EditPosition from "./components/portfolio/EditPosition.jsx";
-import { useEffect } from "react";
-import useRequest from "./hooks/useRequest.js";
+
 
 export default function App() {
     const { user } = useUserContext();
@@ -36,6 +35,8 @@ export default function App() {
                     <Route path="/crypto/:coinId" element={<CoinDetails />} />
                     <Route path="/portfolio/:userId" element={<Portfolio />} />
                     <Route path="/logout" element={<Logout />} />
+                    <Route path="/favorites/:userId" element={<Favorites />} />
+                    <Route path="/edit/:coinId" element={<EditPosition />} />
 
                     <Route element={<Guests user={user}/>}>
                         <Route path="/register" element={<Register />} />
@@ -43,9 +44,7 @@ export default function App() {
                     </Route>
 
                     <Route element={<Users user={user}/>}>
-                        <Route path="/favorites/:userId" element={<Favorites />} />
                         <Route path="/add/:coinId" element={<AddCoin />} />
-                        <Route path="/edit/:coinId" element={<EditPosition />} />
                     </Route>
 
                 </Routes>

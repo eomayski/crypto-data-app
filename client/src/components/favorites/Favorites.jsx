@@ -1,9 +1,10 @@
-import { Navigate, useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 import { useUserContext } from "../../contexts/UserContext.jsx";
 import { useEffect, useState } from "react";
 import FavoriteCard from "./FavoriteCard.jsx";
 
 export default function Favorites() {
+    const navigate = useNavigate();
     const { userId } = useParams();
     const { user } = useUserContext();
     const [followedTraders, setFollowedTraders] = useState([]);
@@ -11,7 +12,7 @@ export default function Favorites() {
 
 
     if (!user || user['_id'] !== userId) {
-        return <Navigate to="/" />
+        navigate("/")
     }
 
 

@@ -1,5 +1,5 @@
 import { Calendar, CoinsIcon, DollarSign, FileText, Hash } from "lucide-react";
-import { Navigate, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import useRequest from "../../hooks/useRequest.js";
 import useForm from "../../hooks/useForm.js";
@@ -22,7 +22,7 @@ export default function EditPosition() {
                 setCoin(result)
                 setValues(result);
                 if (!user || user['_id'] !== result['_ownerId']) {
-                return <Navigate to="/" />
+                navigate('/');
                 }
             })
             .catch((err) => {

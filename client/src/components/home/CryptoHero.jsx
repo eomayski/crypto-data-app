@@ -3,7 +3,6 @@ import { Link } from "react-router";
 
 const COINDESK_SEARCH_API = 'https://data-api.coindesk.com/asset/v1/search';
 
-// Debouncing delay
 const DEBOUNCE_DELAY = 500;
 
 export default function CryptoHero() {
