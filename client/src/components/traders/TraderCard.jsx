@@ -18,7 +18,6 @@ export default function TraderCard({ trader, refresh, followedTradersIds }) {
     const isCurrentlyFollowed = followedTradersIds.includes(currentTraderId); 
 
     const isCurrentUser = isAuthenticated && currentTraderId === user['_id'];
-    const followButtonClasses = "flex items-center px-4 py-2 text-sm font-medium rounded-lg text-white transition duration-150";
 
     const followHandler = async () => {
         if (!isAuthenticated || loading) return;
@@ -27,7 +26,8 @@ export default function TraderCard({ trader, refresh, followedTradersIds }) {
         try {
             await request('/data/followed', 'POST', {
                 traderId: currentTraderId,
-                traderUsername: trader.username
+                traderUsername: trader.username,
+                traderAvatar: trader.avatarUrl
             });
             refresh();
         } catch (err) {

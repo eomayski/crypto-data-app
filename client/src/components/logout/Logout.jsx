@@ -9,7 +9,7 @@ export default function Logout() {
     logoutHandler()
         .then(() => navigate('/'))
         .catch((err) => {
-            console.log(err.message);
+            console.error(err.message);
             navigate('/');
         })
 

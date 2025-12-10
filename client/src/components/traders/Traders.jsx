@@ -7,25 +7,21 @@ export default function Traders() {
     const [followedTraders, setFollowedTraders] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [refresh, setRefresh] = useState(false);
-    const { user } = useUserContext();
-    const isAuthenticated = !!user;
+    const { user, isAuthenticated } = useUserContext();
+
 
     useEffect(() => {
         const abortController = new AbortController();
-        const signal = abortController.signal;
 
         async function fetchAllData() {
             setIsLoading(true);
             try {
-                // 1. Заявка за ВСИЧКИ ТРЕЙДЪРИ
-                const tradersPromise = fetch(`http://localhost:3030/data/traders`, { signal });
+                const tradersPromise = fetch(`http://localhost:3030/data/traders`, { signal: abortController.signal });
 
-                // 2. Заявка за ВСИЧКИ СЛЕДВАНИ ЗАПИСИ на текущия потребител
                 let followedPromise = Promise.resolve([]);
                 if (isAuthenticated) {
                     const userId = user['_id'];
-                    // Заявката връща всички записи, където аз съм собственик
-                    followedPromise = fetch(`http://localhost:3030/data/followed?where=_ownerId%3D%22${userId}%22`, { signal });
+                    followedPromise = fetch(`http://localhost:3030/data/followed?where=_ownerId%3D%22${userId}%22`, { signal: abortController.signal });
                 }
 
                 const [tradersResponse, followedResponse] = await Promise.all([
