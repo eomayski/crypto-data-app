@@ -9,7 +9,9 @@ export default function AddCoin() {
     const { coinId } = useParams()
     const [coin, setCoin] = useState({})
     const { user } = useUserContext();
-
+    const navigate = useNavigate();
+    const { request } = useRequest();
+    
     useEffect(() => {
         const abortController = new AbortController();
         fetch(`https://data-api.coindesk.com/asset/v2/metadata?assets=${coinId}&quote_asset=USD&asset_language=en-US&asset_lookup_priority=SYMBOL`, { signal: abortController.signal })
@@ -27,8 +29,6 @@ export default function AddCoin() {
 
 
 
-    const navigate = useNavigate();
-    const { request } = useRequest();
 
     const addCoinHandler = async (values) => {
         const data = values;
