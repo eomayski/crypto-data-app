@@ -2,7 +2,7 @@
 
 A comprehensive cryptocurrency tracking and portfolio management application with real-time trading insights, news aggregation, and social features.
 
-![Image](https://github.com/user-attachments/assets/2aad1804-dcfd-4edb-81cf-41c7e8087ec1)
+![Image](https://github.com/user-attachments/assets/4c27e74c-e34e-4711-8851-251fa4a9a851)
 
 ## ✨ Key Features
 
@@ -15,12 +15,15 @@ A comprehensive cryptocurrency tracking and portfolio management application wit
 - Browse all available cryptocurrencies with detailed information
 - View crypto prices and market data
 - Interactive carousel showcasing featured cryptocurrencies
-- Search and filter capabilities for quick navigation
+- Search capabilities for quick navigation
+
+![image](https://github.com/user-attachments/assets/a0c1f00b-b888-4bf3-8d38-2f26635550ca)
 
 ### 📰 Latest Crypto News
 - Cryptocurrency news feed
 - Detailed news article pages with full content
-- Stay updated on market trends and developments
+
+![image](https://github.com/user-attachments/assets/8ef7a3df-0039-410f-abf0-4755ab266336)
 
 ### 👥 Trader Community & Social Features
 - Discover and follow other traders in the community
@@ -28,14 +31,16 @@ A comprehensive cryptocurrency tracking and portfolio management application wit
 - Follow/Unfollow traders
 - Real-time synchronization of follow status
 
+![](https://github.com/user-attachments/assets/5d68b846-2765-49b7-98d1-2afdbb707f57)
+
 ### 💼 Portfolio Management
 - Create and manage trading positions
 - Track your cryptocurrency holdings and performance
 - Add new positions with amount and entry price
 - Edit existing positions to update information
 - Delete positions when closing trades
-- View position details including gain/loss metrics
-- Real-time portfolio performance calculations
+
+![image](https://github.com/user-attachments/assets/fe6b047a-78d9-4579-b031-0cde785ef45d)
 
 ### ⭐ Favorites & Watchlist
 - Mark favorite cryptocurrencies for quick access
@@ -62,12 +67,7 @@ A comprehensive cryptocurrency tracking and portfolio management application wit
 - React Router for navigation
 - Tailwind CSS for styling
 - Lucide React for icons
-
-**Backend:**
-- Node.js with Express-like routing
-- JSON-based data storage
-- In-memory collections management
-- RESTful API architecture
+- Slick for carousel
 
 ## 📦 Project Structure
 
