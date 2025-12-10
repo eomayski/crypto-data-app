@@ -12,30 +12,24 @@ export default function Header() {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
 
-                    {/* Logo / Title */}
                     <div className="flex-shrink-0">
-                        {/* Using Link for home navigation */}
                         <Link to="/" className="text-xl font-bold text-white tracking-wider">
                             <img src="/images/logo.png" alt="Crypto-Data" className='w-18' />
                         </Link>
                     </div>
 
-                    {/* Navigation and Auth Links for Desktop */}
                     <div className="hidden md:flex md:items-center md:space-x-6">
 
-                        {/* Main Navigation Links (Индивидуални елементи) */}
                         <nav className="flex space-x-4">
-                            {/* News Link */}
                             <NavLink
-                                style={({isActive}) => isActive ? {color: '#7c86ff'} : {} }
+                                style={({ isActive }) => isActive ? { color: '#7c86ff' } : {}}
                                 to="/latest-news"
                                 className="text-white hover:text-indigo-300 transition duration-150 ease-in-out text-sm font-medium p-2 rounded-md"
                             >
                                 News
                             </NavLink>
-                            {/* Traders Link */}
                             <NavLink
-                                style={({isActive}) => isActive ? {color: '#7c86ff'} : {} }
+                                style={({ isActive }) => isActive ? { color: '#7c86ff' } : {}}
                                 to="/traders"
                                 className="text-white hover:text-indigo-300 transition duration-150 ease-in-out text-sm font-medium p-2 rounded-md"
                             >
@@ -56,7 +50,7 @@ export default function Header() {
                                         </Link>
 
                                         <NavLink
-                                            style={({isActive}) => isActive ? {color: '#7c86ff'} : {} }
+                                            style={({ isActive }) => isActive ? { color: '#7c86ff' } : {}}
                                             to={`/favorites/${user['_id']}`}
                                             className="text-white hover:text-indigo-300 transition duration-150 ease-in-out text-sm font-medium rounded-md"
                                         >
@@ -64,7 +58,7 @@ export default function Header() {
                                         </NavLink>
 
                                         <NavLink
-                                            style={({isActive}) => isActive ? {color: '#7c86ff'} : {} }
+                                            style={({ isActive }) => isActive ? { color: '#7c86ff' } : {}}
                                             to={`/portfolio/${user['_id']}`}
                                             className="text-white hover:text-indigo-300 transition duration-150 ease-in-out text-sm font-medium rounded-md"
                                         >
@@ -76,7 +70,7 @@ export default function Header() {
                                 (
                                     <div className="flex space-x-4 ml-6">
                                         <NavLink
-                                            style={({isActive}) => isActive ? {backgroundColor: '#4f39f6'} : {} }
+                                            style={({ isActive }) => isActive ? { backgroundColor: '#4f39f6' } : {}}
                                             to="/login"
                                             className="px-3 py-1 text-sm font-medium rounded-md bg-transparent border border-white/30 hover:bg-white/10 text-white transition duration-150 ease-in-out"
                                         >
@@ -84,7 +78,7 @@ export default function Header() {
                                         </NavLink>
 
                                         <NavLink
-                                            style={({isActive}) => isActive ? {backgroundColor: '#4f39f6'} : {} }
+                                            style={({ isActive }) => isActive ? { backgroundColor: '#4f39f6' } : {}}
                                             to="/register"
                                             className="px-3 py-1 text-sm font-medium rounded-md bg-transparent border border-white/30 hover:bg-white/10 text-white transition duration-150 ease-in-out"
                                         >
@@ -114,7 +108,6 @@ export default function Header() {
                 <div className="md:hidden backdrop-filter backdrop-blur-lg shadow-lg bg-opacity-90">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
 
-                        {/* News Link - Mobile */}
                         <Link
                             to="/latest-news"
                             className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10 hover:bg-opacity-10"
@@ -122,7 +115,6 @@ export default function Header() {
                         >
                             News
                         </Link>
-                        {/* Traders Link - Mobile */}
                         <Link
                             to="/traders"
                             className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10 hover:bg-opacity-10"
@@ -130,39 +122,43 @@ export default function Header() {
                         >
                             Traders
                         </Link>
-                        {/* Portfolio Link - Mobile */}
-                        <Link
-                            to="/portfolio"
-                            className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10 hover:bg-opacity-10"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            Portfolio
-                        </Link>
 
-
-                        {/* Auth Links */}
                         <div className="pt-2 border-t border-white/10">
-                            <Link
-                                to="/logout"
-                                className="block w-full text-left px-3 py-2 text-base font-medium rounded-md border border-white/30 hover:bg-white/10 text-white mt-2"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                Logout
-                            </Link>
-                            <Link
-                                to="/login"
-                                className="block w-full text-left px-3 py-2 text-base font-medium rounded-md border border-white/30 hover:bg-white/10 text-white mt-2"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                Login
-                            </Link>
-                            <Link
-                                to="/register"
-                                className="block w-full text-left px-3 py-2 text-base font-medium rounded-md border border-white/30 hover:bg-white/10 text-white mt-2"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                Register
-                            </Link>
+                            {isAuthenticated ?
+                                <>
+                                    <Link
+                                        to="/logout"
+                                        className="block w-full text-left px-3 py-2 text-base font-medium rounded-md border border-white/30 hover:bg-white/10 text-white mt-2"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        Logout
+                                    </Link>
+                                    <Link
+                                        to={`/portfolio/${user['_id']}`}
+                                        className="block w-full text-left px-3 py-2 text-base font-medium rounded-md border border-white/30 hover:bg-white/10 text-white mt-2"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        Profile
+                                    </Link>
+                                </>
+                                :
+                                <>
+                                    <Link
+                                        to="/login"
+                                        className="block w-full text-left px-3 py-2 text-base font-medium rounded-md border border-white/30 hover:bg-white/10 text-white mt-2"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        Login
+                                    </Link>
+                                    <Link
+                                        to="/register"
+                                        className="block w-full text-left px-3 py-2 text-base font-medium rounded-md border border-white/30 hover:bg-white/10 text-white mt-2"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        Register
+                                    </Link>
+                                </>
+                            }
                         </div>
                     </div>
                 </div>

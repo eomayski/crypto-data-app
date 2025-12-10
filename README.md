@@ -162,10 +162,6 @@ Client runs on `http://localhost:5173`
 - `POST /data/followed` - Follow a trader
 - `DELETE /data/followed/:id` - Unfollow a trader
 
-## 📝 Configuration
-
-The application uses environment variables for API configuration. Default backend URL is `http://localhost:3030`.
-
 ## 🤝 Contributing
 
 This is a SoftUni React exam project.
