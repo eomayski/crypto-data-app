@@ -1331,12 +1331,11 @@
     			hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
     		},
     		"91cf8b4a-a7ba-4349-b5f7-37d8ae950e51": {
-    			email: "pesho@abv.bg",
+    			email: "ivan@abv.bg",
     			hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
     		},
     		"60f0cf0b-34b0-4abd-9769-8c42f830dffc": {
     			email: "admin@abv.bg",
-    			username: "Admin",
     			hashedPassword: "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302"
     		}
     	},
@@ -1347,14 +1346,14 @@
     	traders: {
     		"6360aeee-d5e7-4a66-bfb1-faefc1096f9c": {
     			_ownerId: "bc21cd8b-ed81-4f15-9cbf-4b5062e14109",
-                username: "eomayski",
+                username: "Emil",
                 avatarUrl: "https://media-assets.wired.it/photos/615d9c4c52163f7b20f02a20/master/w_1600%2Cc_limit/ready-player-one-1200-1200-675-675-crop-000000.jpg",
                 _createdOn: 1765223805482,
     			_updatedOn: 1765223815482
     		},
     		"7a11764b-2c87-4078-b84a-5b188eb1294b": {
     			_ownerId: "91cf8b4a-a7ba-4349-b5f7-37d8ae950e51",
-                username: "Pesho",
+                username: "Ivan123",
                 avatarUrl: "https://e7.pngegg.com/pngimages/348/800/png-clipart-man-wearing-blue-shirt-illustration-computer-icons-avatar-user-login-avatar-blue-child.png",
                 _createdOn: 1765256734230,
     			_updatedOn: 1765256744230
@@ -1377,7 +1376,7 @@
     		"baaddc40-d0e4-4095-8f4e-96a537ece3aa": {
                 _ownerId: "bc21cd8b-ed81-4f15-9cbf-4b5062e14109",
                 quantity: 250,
-                price: 600,
+                price: 1.5,
                 date: "2024-07-29",
                 exchange: "BYBIT",
                 note: "I missed a big profit on this one.",
@@ -1400,6 +1399,8 @@
                 _createdOn: 1765246477016,
     			_updatedOn: 1765256744230
     		}
+    	},
+    	followed: {
     	}
     };
     var rules$1 = {

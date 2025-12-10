@@ -30,7 +30,6 @@ export default function FavoriteCard({ trader, refresh }) {
 
     const { traderUsername, traderAvatar, traderId } = trader;
 
-    console.log(traderUsername);
     
     return (
         <div

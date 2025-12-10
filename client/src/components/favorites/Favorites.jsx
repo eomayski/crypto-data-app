@@ -2,7 +2,6 @@ import { Navigate, useParams } from "react-router";
 import { useUserContext } from "../../contexts/UserContext.jsx";
 import { useEffect, useState } from "react";
 import FavoriteCard from "./FavoriteCard.jsx";
-import useRequest from "../../hooks/useRequest.js";
 
 export default function Favorites() {
     const { userId } = useParams();
@@ -25,7 +24,6 @@ export default function Favorites() {
             })
             .catch((err) => {
                 console.error(err.message);
-                setFollowedTraders([])
             })
 
 

@@ -10,6 +10,8 @@ export default function Portfolio() {
     const [traders, setTraders] = useState([]);
     const [positions, setPositions] = useState([])
     const [refresh, setRefresh] = useState(false)
+    const [followersCount, setFollowersCount] = useState([])
+    const [totalValue, setTotalValue] = useState(0)
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -19,20 +21,33 @@ export default function Portfolio() {
                 setTraders(result);
             })
             .catch((err) => {
-                console.log(err.message);
+                console.error(err.message);
             })
 
-        
-            fetch(`http://localhost:3030/data/positions?where=_ownerId%3D%22${userId}%22`, { signal: abortController.signal })
+
+        fetch(`http://localhost:3030/data/positions?where=_ownerId%3D%22${userId}%22`, { signal: abortController.signal })
             .then(response => response.json())
             .then(result => {
                 setPositions(result);
+                let total = 0
+
+                for (const asset of result) {
+                    total += asset.quantity * asset.price
+                }
+                setTotalValue(total)
             })
             .catch((err) => {
-                console.log(err.message);
+                console.error(err.message);
             })
 
-            
+        fetch(`http://localhost:3030/data/followed?where=traderId%3D%22${userId}%22`, { signal: abortController.signal })
+            .then(response => response.json())
+            .then(result => {
+                setFollowersCount(result);
+            })
+            .catch((err) => {
+                console.error(err.message);
+            })
 
         return () => abortController.abort();
 
@@ -40,11 +55,9 @@ export default function Portfolio() {
     }, [refresh, userId]);
 
 
-    
-
     const trader = traders.find(t => t['_ownerId'] === userId);
 
-    
+
 
     if (!trader) {
         return <div className="text-white text-center py-12">Trader not found</div>;
@@ -52,7 +65,7 @@ export default function Portfolio() {
 
     const totalPLColor = 1220 >= 0 ? 'text-green-400' : 'text-red-500';
 
-    const dateFormatted = trader['_createdOn'] 
+    const dateFormatted = trader['_createdOn']
         ? new Intl.DateTimeFormat("en-US", {
             year: "numeric",
             month: 'long',
@@ -60,15 +73,15 @@ export default function Portfolio() {
         }).format(new Date(trader['_createdOn']))
         : 'Loading...';
 
-        function forceRefresh() {
-            setRefresh(state => !state)
-        }
+    function forceRefresh() {
+        setRefresh(state => !state)
+    }
 
     return (
         <div className="flex flex-grow bg-gray-900 text-white py-12">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-  
+
                 <div className="bg-gray-800 p-8 rounded-xl shadow-2xl mb-12 border border-indigo-500/30">
                     <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8 border-b border-gray-700 pb-6">
 
@@ -92,24 +105,24 @@ export default function Portfolio() {
                                     <Calendar className="w-4 h-4 mr-2 text-indigo-400" />
                                     <span className="font-medium text-white mr-1">Registered:</span> {dateFormatted}
                                 </p>
-                                {/* <p className="flex items-center justify-center md:justify-start">
+                                <p className="flex items-center justify-center md:justify-start">
                                     <Users className="w-4 h-4 mr-2 text-indigo-400" />
-                                    <span className="font-medium text-white mr-1">Followers:</span> many
-                                </p> */}
+                                    <span className="font-medium text-white mr-1">Followers:</span> {followersCount.length}
+                                </p>
                             </div>
                         </div>
                     </div>
 
-                    {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
 
                         <div className="p-4 bg-gray-700 rounded-lg shadow-inner">
                             <p className="text-sm font-medium text-gray-400">Total Asset Value (USD)</p>
                             <p className="text-3xl font-bold text-white mt-1">
-                                {formatCurrency(12500)}
+                                {formatCurrency(totalValue)}
                             </p>
                         </div>
 
-                        <div className="p-4 bg-gray-700 rounded-lg shadow-inner">
+                        {/* <div className="p-4 bg-gray-700 rounded-lg shadow-inner">
                             <p className="text-sm font-medium text-gray-400">Total P&L (USD)</p>
                             <p className={`text-3xl font-bold mt-1 ${totalPLColor}`}>
                                 {formatCurrency(1220)}
@@ -121,11 +134,11 @@ export default function Portfolio() {
                             <p className="text-3xl font-bold mt-1">
                                 {formatPercentage(9.75)}
                             </p>
-                        </div>
-                    </div> */}
+                        </div> */}
+                    </div>
                 </div>
 
-                
+
                 <h2 className="text-3xl font-extrabold text-white mb-6 border-b border-indigo-500/50 pb-2">
                     Open Trades:
                 </h2>
@@ -137,10 +150,10 @@ export default function Portfolio() {
                             No open trades yet!
                         </h2>
                     </div>
-                ) }
+                )}
 
                 <div className="space-y-6">
-                    {positions.map((position) => <Position key={position['_id']} asset={position} userId={userId} refresh={forceRefresh}/>)}
+                    {positions.map((position) => <Position key={position['_id']} asset={position} userId={userId} refresh={forceRefresh} />)}
                 </div>
 
             </div>
